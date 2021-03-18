@@ -1,0 +1,32 @@
+.wrapper-form{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .wrapper-form {
+    flex-direction: column;
+  }
+}
+
+.cont-item{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  transition: 1s;
+  max-height: 50px;
+  min-height: 50px;
+}
+
+@media(max-width : 1200px){
+  .cont-item{
+    margin-top: 70px;
+  }
+}
+.wrapper-cont-item{
+  flex-direction: column;
+  width: 100%;
+  max-height: 50px;
+  min-height: 50px;
+}
