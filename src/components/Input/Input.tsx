@@ -12,10 +12,9 @@ const Input: React.FC<InputTypes> = ({
   return (
     <>
       <div>
-        <Label className="label">{label}</Label>
+        <Label>{label}</Label>
       </div>
       <InputModal
-        className="input-modal"
         required
         placeholder={placeholder}
         value={val}
