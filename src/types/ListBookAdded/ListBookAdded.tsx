@@ -1,4 +1,4 @@
-import { Obj } from "../../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 
 type ListBooksAddedType = {
   setCheckClicked: React.Dispatch<React.SetStateAction<Boolean>>;

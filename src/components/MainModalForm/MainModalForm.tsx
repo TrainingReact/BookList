@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addBook, modifyBook } from "../../../store/reducers/bookReducer";
-import ModalJsx from "./ModalJsx/ModalJsx";
-import MainModalFormPropsTypes from "../../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
-import getKeys from "../../../utils/getKeysFunc";
-import setError from "../../../utils/setErrorFunc";
-import clearAllField from "./../../../utils/clearAllField";
-import Field from "../.../../../../types/FieldTypes/FieldTypes";
+import { addBook, modifyBook } from "../../store/reducers/bookReducer";
+import ModalJsx from "../ModalJsx/ModalJsx";
+import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
+import getKeys from "../../utils/getKeysFunc";
+import setError from "../../utils/setErrorFunc";
+import clearAllField from "../../utils/clearAllField";
+import Field from "../../types/FieldTypes/FieldTypes";
 
 export interface Obj {
   id: number;

@@ -1,6 +1,6 @@
 import getKeys from "../utils/getKeysFunc";
 import { objKeys } from "../types/objKeysTypes/objKeysType";
-import { Obj } from "./../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../components/MainModalForm/MainModalForm";
 const setError = (
   book: Obj,
   setBook: React.Dispatch<React.SetStateAction<Obj>>,

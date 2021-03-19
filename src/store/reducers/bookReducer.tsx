@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setTextRange } from "typescript";
 import Field from "../../types/FieldTypes/FieldTypes";
 
 interface Book {
@@ -11,14 +12,16 @@ interface Book {
 
 interface BookState {
   books: Book[];
+  modalChecker: boolean;
 }
 
 const initialState = {
   books: [],
+  modalChecker: false,
 } as BookState;
 
 const bookSlice = createSlice({
-  name: "counter",
+  name: "books",
   initialState,
   reducers: {
     addBook(state, action) {
@@ -31,6 +34,9 @@ const bookSlice = createSlice({
       state.books = state.books.map((val) => {
         return val.id === action.payload.id ? (val = action.payload.book) : val;
       });
+    },
+    toggleModalChecker(state, action) {
+      state.modalChecker = !state.modalChecker;
     },
   },
 });

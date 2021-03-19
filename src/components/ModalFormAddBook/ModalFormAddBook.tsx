@@ -1,5 +1,5 @@
 import ModalProps from "../../types/ModalTypes/ModalTypes";
-import MainModalForm from "./MainModalForm/MainModalForm";
+import MainModalForm from "../MainModalForm/MainModalForm";
 import { Modal, ModalContent } from "./ModalFormAddBookStyle";
 const ModalFormAddBook: React.FC<ModalProps> = ({
   checkClicked,

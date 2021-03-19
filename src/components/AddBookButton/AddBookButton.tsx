@@ -15,22 +15,12 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
   setBook,
   idBookToModify,
 }) => {
-  const [checkOver, setCheckOver] = useState<Boolean>(false);
-
   const store = useSelector((state: any) => state.books.books);
 
   const checkStoreLength = store && store.length;
 
   const handleClick = () => {
     setCheckClicked(true);
-  };
-
-  const handleMouseOver = () => {
-    setCheckOver(true);
-  };
-
-  const handleMouseOut = () => {
-    setCheckOver(false);
   };
 
   return (
@@ -41,10 +31,7 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
         color={"red"}
         onClick={handleClick}
       >
-        <AddCircleRoundedIcon
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-        />
+        <AddCircleRoundedIcon />
       </ContainerIcon>
       <ModalFormAddBook
         setBook={setBook}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddBookButton from "../../components/AddBookButton/AddBookButton";
 import ListBooksAdded from "../../components/ListBooksAdded/ListBooksAdded";
-import { Obj } from "../../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 import clearAllField from "../../utils/clearAllField";
 import setError from "../../utils/setErrorFunc";
 const Index = () => {

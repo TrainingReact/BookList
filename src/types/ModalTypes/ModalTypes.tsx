@@ -1,4 +1,4 @@
-import { Obj } from "../../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 type ModalProps = {
   checkClicked: Boolean;
   setCheckClicked: React.Dispatch<React.SetStateAction<Boolean>>;
