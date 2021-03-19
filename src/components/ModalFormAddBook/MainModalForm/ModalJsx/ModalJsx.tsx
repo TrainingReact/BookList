@@ -1,10 +1,16 @@
 import React from "react";
 import ModalJsxTypes from "../../../../types/ModalJsxTypes/ModalJsxTypes";
-import "./ModalJsx.css";
 import { useSelector } from "react-redux";
 import Input from "../../../../components/Input/Input";
 import LabelSwitch from "../../../LabelSwitch/LabelSwitch";
 import ButtonSubmit from "../../../ButtonModify/ButtonModify";
+import {
+  DirectionColumn,
+  ContImg,
+  ImgSize,
+  Close,
+  WrapperForm,
+} from "./ModalJsxStyle";
 const ModalJsx: React.FC<ModalJsxTypes> = ({
   book,
   handleAddBook,
@@ -17,18 +23,16 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
   const state: any = useSelector((state: any) => state.books.books);
   return (
     <>
-      <div className="cont-item-span">
-        <span onClick={handleClose} className="close">
-          &times;
-        </span>
+      <div>
+        <Close onClick={handleClose}>&times;</Close>
       </div>
 
       {!checkModify ? (
         <LabelSwitch setToggle={setToggle} toggle={toggle} />
       ) : null}
 
-      <div className="wrapper-form">
-        <div className="direction-column">
+      <WrapperForm>
+        <DirectionColumn>
           <Input
             label="name"
             name="name"
@@ -37,8 +41,8 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
             val={book.name.value}
             handleType={handleType}
           />
-        </div>
-        <div className="direction-column">
+        </DirectionColumn>
+        <DirectionColumn>
           <Input
             label="author"
             name="author"
@@ -47,8 +51,8 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
             val={book.author.value}
             handleType={handleType}
           />
-        </div>
-        <div className="direction-column">
+        </DirectionColumn>
+        <DirectionColumn>
           <Input
             label="gender"
             name="gender"
@@ -57,8 +61,8 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
             val={book.gender.value}
             handleType={handleType}
           />
-        </div>
-        <div className="direction-column">
+        </DirectionColumn>
+        <DirectionColumn>
           <Input
             label="img"
             name="img"
@@ -67,19 +71,18 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
             val={book.img.value}
             handleType={handleType}
           />
-          <div className="cont-img">
-            <img
+          <ContImg>
+            <ImgSize
               alt="err"
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                 e.currentTarget.src =
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPBoJ-u5is_IuOgE2wj18XdIB94tsYhy6V-Q&usqp=CAU";
               }}
-              className="img-size"
               src={book.img.value}
             />
-          </div>
-        </div>
-      </div>
+          </ContImg>
+        </DirectionColumn>
+      </WrapperForm>
 
       <ButtonSubmit checkModify={checkModify} handleAddBook={handleAddBook} />
     </>

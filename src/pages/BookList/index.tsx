@@ -17,8 +17,6 @@ const Index = () => {
     img: { value: "", error: "" },
   });
 
-  console.log(`some of this`);
-
   const handleClose = () => {
     let val = "";
     clearAllField(book, setBook);

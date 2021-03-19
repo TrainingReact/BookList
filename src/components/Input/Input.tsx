@@ -24,7 +24,7 @@ const Input: React.FC<InputTypes> = ({
         type="text"
       />
 
-      <div className="text-error">
+      <div>
         <TextError>{error}</TextError>
       </div>
     </>
