@@ -39,11 +39,11 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
         checkStoreLength
         className={checkStoreLength > 0 ? "allFill" : ""}
         color={"red"}
+        onClick={handleClick}
       >
         <AddCircleRoundedIcon
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
-          onClick={handleClick}
         />
       </ContainerIcon>
       <ModalFormAddBook

@@ -12,10 +12,9 @@ const Input: React.FC<InputTypes> = ({
   return (
     <>
       <div>
-        <Label className="label">{label}</Label>
+        <Label>{label}</Label>
       </div>
       <InputModal
-        className="input-modal"
         required
         placeholder={placeholder}
         value={val}
@@ -24,7 +23,7 @@ const Input: React.FC<InputTypes> = ({
         type="text"
       />
 
-      <div className="text-error">
+      <div>
         <TextError>{error}</TextError>
       </div>
     </>

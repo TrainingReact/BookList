@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import "./MainModalForm.css";
 import { addBook, modifyBook } from "../../../store/reducers/bookReducer";
 import ModalJsx from "./ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
