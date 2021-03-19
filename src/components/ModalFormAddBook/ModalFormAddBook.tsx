@@ -1,6 +1,6 @@
 import ModalProps from "../../types/ModalTypes/ModalTypes";
 import MainModalForm from "./MainModalForm/MainModalForm";
-import "./ModalFormAddBook.css";
+import { Modal, ModalContent } from "./ModalFormAddBookStyle";
 const ModalFormAddBook: React.FC<ModalProps> = ({
   checkClicked,
   setCheckClicked,
@@ -14,8 +14,8 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
   return (
     <div>
       {checkClicked ? (
-        <div className="modal fade-in">
-          <div className="modal-content">
+        <Modal className={"fade"}>
+          <ModalContent>
             <MainModalForm
               setBook={setBook}
               book={book}
@@ -25,8 +25,8 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
               handleClose={handleClose}
               setCheckClicked={setCheckClicked}
             />
-          </div>
-        </div>
+          </ModalContent>
+        </Modal>
       ) : null}
     </div>
   );

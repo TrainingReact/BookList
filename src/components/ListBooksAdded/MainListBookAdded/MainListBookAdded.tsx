@@ -6,10 +6,14 @@ import LabelListBookField from "./LabelListBookField/LabelListBookField";
 import MainListBookAddedTypes from "../../../types/ListBookAddedTypes/ListBookAddedTypes";
 import {
   Header,
-  ContItemMapFlex,
+  NameHeaderText,
   ContItemMapFlexIcon,
   WrapperItem,
   ContImg,
+  ImgMapList,
+  CursorPointer,
+  CursorPointerDelete,
+  AddBookSpan,
 } from "./MainListBookAddedStyle";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
@@ -25,29 +29,27 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
           return (
             <div key={index}>
               <Header
-              // style={{
-              //   borderTopRightRadius: index > 0 ? "0px" : "20px",
-              //   borderTopLeftRadius: index > 0 ? "0px" : "20px",
-              // }}
+                className={
+                  index > 0 ? "borderTopRightRadius" : "borderTopLeftRadius"
+                }
               >
-                <div className="name-header-text">{val.name.value}</div>
+                <NameHeaderText>{val.name.value}</NameHeaderText>
               </Header>
               <WrapperItem
-              // style={{
-              //   borderBottomLeftRadius: lastItem === index + 1 ? "20px" : "",
-              //   borderBottomRightRadius: lastItem === index + 1 ? "20px" : "",
-              // }}
+                className={
+                  lastItem === index + 1
+                    ? "borderBottomLeftRadius"
+                    : "borderBottomRightRadius"
+                }
               >
-                <ContImg className="cont-img">
-                  <img
-                    alt="err"
+                <ContImg>
+                  <ImgMapList
                     onError={(
                       e: React.SyntheticEvent<HTMLImageElement, Event>
                     ) => {
                       e.currentTarget.src =
                         "https://pngimg.com/uploads/book/book_PNG51090.png";
                     }}
-                    className="img-map-list"
                     src={val.img.value}
                   />
                 </ContImg>
@@ -57,27 +59,23 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                 <LabelListBookField val={val} label="gender" />
 
                 <ContItemMapFlexIcon>
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleModify(val.id)}
-                  >
+                  <CursorPointer onClick={() => handleModify(val.id)}>
                     <CreateIcon />
-                  </div>
-                  <div
-                    className="cursor-pointer-delete"
+                  </CursorPointer>
+                  <CursorPointerDelete
                     onClick={() => handleDelete(val && val.id)}
                   >
                     <DeleteIcon />
-                  </div>
+                  </CursorPointerDelete>
                 </ContItemMapFlexIcon>
               </WrapperItem>
             </div>
           );
         })
       ) : (
-        <div className="add-book-span">
+        <AddBookSpan>
           <div>add a book!</div>
-        </div>
+        </AddBookSpan>
       )}
     </>
   );
