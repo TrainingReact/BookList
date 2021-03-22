@@ -3,6 +3,7 @@ import React from "react";
 import {
   deleteBook,
   toggleModalChecker,
+  toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
 import { useDispatch } from "react-redux";
 import ListBookAddedType from "../../types/ListBookAdded/ListBookAdded";
@@ -11,9 +12,7 @@ import { objKeys } from "../../types/objKeysTypes/objKeysType";
 import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
-  setCheckModify,
   setIdBookToModify,
-  checkerModal,
   book,
   setBook,
 }) => {
@@ -44,7 +43,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
       }
     });
     setIdBookToModify(id && id);
-    setCheckModify(true);
+    dispatch(toggleModalCheckerModify(true));
     dispatch(toggleModalChecker(true));
   };
 

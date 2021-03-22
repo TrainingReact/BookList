@@ -1,5 +1,4 @@
 type ButtonTypes = {
-  checkModify: any;
   handleAddBook: any;
 };
 

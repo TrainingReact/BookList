@@ -16,18 +16,20 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
   handleAddBook,
   handleType,
   handleClose,
-  checkModify,
   setToggle,
   toggle,
 }) => {
-  const state: any = useSelector((state: any) => state.books.books);
+  const checkModalModify: any = useSelector(
+    (state: any) => state.books.modalCheckerModify
+  );
+
   return (
     <>
       <div>
         <Close onClick={handleClose}>&times;</Close>
       </div>
 
-      {!checkModify ? (
+      {!checkModalModify ? (
         <LabelSwitch setToggle={setToggle} toggle={toggle} />
       ) : null}
 
@@ -84,7 +86,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
       </WrapperForm>
 
-      <ButtonSubmit checkModify={checkModify} handleAddBook={handleAddBook} />
+      <ButtonSubmit handleAddBook={handleAddBook} />
     </>
   );
 };
