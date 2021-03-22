@@ -13,7 +13,6 @@ import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
   setIdBookToModify,
-  checkerModal,
   book,
   setBook,
 }) => {

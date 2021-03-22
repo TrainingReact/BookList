@@ -13,12 +13,6 @@ import { useSelector } from "react-redux";
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
 
-  const checkerModal = useSelector((state: any) => state.books.modalChecker);
-
-  const checkerModalModify = useSelector(
-    (state: any) => state.books.modalCheckerModify
-  );
-
   const dispatch = useDispatch();
 
   const [book, setBook] = useState<Obj>({
@@ -46,7 +40,6 @@ const Index = () => {
         setBook={setBook}
       />
       <ListBooksAdded
-        checkerModal={checkerModal}
         book={book}
         setBook={setBook}
         setIdBookToModify={setIdBookToModify}
