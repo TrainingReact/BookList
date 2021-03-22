@@ -9,7 +9,6 @@ import {
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
-import { useSelector } from "react-redux";
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
 

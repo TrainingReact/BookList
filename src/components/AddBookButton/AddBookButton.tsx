@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddBookButtonTypes from "../../types/AddBookButtonTypes/AddBookButtonTypes";
 import Wrapper, { ContainerIcon } from "./AddBookButtonStyle";
 import { toggleModalChecker } from "../../store/reducers/bookReducer";
+
 const AddBookButton: React.FC<AddBookButtonTypes> = ({
   handleClose,
   book,
