@@ -1,8 +1,7 @@
-import { Obj } from "../../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 
 type MainModalFormPropsTypes = {
   handleClose: any;
-  setCheckClicked: React.Dispatch<React.SetStateAction<Boolean>>;
   setCheckModify: React.Dispatch<React.SetStateAction<Boolean>>;
   checkModify: Boolean;
   idBookToModify: number;

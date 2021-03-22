@@ -1,9 +1,9 @@
 import React from "react";
-import ModalJsxTypes from "../../../../types/ModalJsxTypes/ModalJsxTypes";
+import ModalJsxTypes from "../../types/ModalJsxTypes/ModalJsxTypes";
 import { useSelector } from "react-redux";
-import Input from "../../../../components/Input/Input";
-import LabelSwitch from "../../../LabelSwitch/LabelSwitch";
-import ButtonSubmit from "../../../ButtonModify/ButtonModify";
+import Input from "../Input/Input";
+import LabelSwitch from "../LabelSwitch/LabelSwitch";
+import ButtonSubmit from "../ButtonModify/ButtonModify";
 import {
   DirectionColumn,
   ContImg,

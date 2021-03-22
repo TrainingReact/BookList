@@ -1,8 +1,6 @@
-import { Obj } from "../../components/ModalFormAddBook/MainModalForm/MainModalForm";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 
 type AddBookButton = {
-  setCheckClicked: React.Dispatch<React.SetStateAction<Boolean>>;
-  checkClicked: Boolean;
   handleClose: any;
   setCheckModify: React.Dispatch<React.SetStateAction<Boolean>>;
   checkModify: Boolean;
