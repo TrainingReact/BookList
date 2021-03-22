@@ -36,11 +36,16 @@ const bookSlice = createSlice({
       });
     },
     toggleModalChecker(state, action) {
-      state.modalChecker = !state.modalChecker;
+      state.modalChecker = action.payload;
     },
   },
 });
 
-export const { addBook, deleteBook, modifyBook } = bookSlice.actions;
+export const {
+  addBook,
+  deleteBook,
+  modifyBook,
+  toggleModalChecker,
+} = bookSlice.actions;
 
 export default bookSlice.reducer;
