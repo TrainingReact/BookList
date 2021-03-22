@@ -6,10 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import AddBookButtonTypes from "../../types/AddBookButtonTypes/AddBookButtonTypes";
 import Wrapper, { ContainerIcon } from "./AddBookButtonStyle";
 import { toggleModalChecker } from "../../store/reducers/bookReducer";
+
 const AddBookButton: React.FC<AddBookButtonTypes> = ({
   handleClose,
-  setCheckModify,
-  checkModify,
   book,
   setBook,
   idBookToModify,
@@ -38,8 +37,6 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
         setBook={setBook}
         book={book}
         idBookToModify={idBookToModify}
-        setCheckModify={setCheckModify}
-        checkModify={checkModify}
         handleClose={handleClose}
       />
     </Wrapper>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addBook,
   modifyBook,
   toggleModalChecker,
+  toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
 import ModalJsx from "../ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
@@ -22,14 +23,16 @@ export interface Obj {
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   handleClose,
-  setCheckModify,
-  checkModify,
   book,
   idBookToModify,
   setBook,
 }) => {
   const [toggle, setToggle] = useState<Boolean>(false);
   const dispatch = useDispatch();
+
+  const checkerModalModify = useSelector(
+    (state: any) => state.books.modalCheckerModify
+  );
 
   let val = "required field";
 
@@ -45,9 +48,9 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
     });
 
     if (allFill) {
-      if (checkModify) {
+      if (checkerModalModify) {
         dispatch(modifyBook({ book: book, id: idBookToModify }));
-        setCheckModify(false);
+        dispatch(toggleModalCheckerModify(false));
         clearAllField(book, setBook);
         dispatch(toggleModalChecker(false));
       } else {
@@ -75,7 +78,6 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
 
   return (
     <ModalJsx
-      checkModify={checkModify}
       book={book}
       handleAddBook={handleAddBook}
       handleType={handleType}

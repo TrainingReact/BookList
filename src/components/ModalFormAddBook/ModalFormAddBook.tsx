@@ -3,9 +3,7 @@ import MainModalForm from "../MainModalForm/MainModalForm";
 import { Modal, ModalContent } from "./ModalFormAddBookStyle";
 import { useSelector } from "react-redux";
 const ModalFormAddBook: React.FC<ModalProps> = ({
-  checkModify,
   handleClose,
-  setCheckModify,
   book,
   idBookToModify,
   setBook,
@@ -21,8 +19,6 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
               setBook={setBook}
               book={book}
               idBookToModify={idBookToModify}
-              checkModify={checkModify}
-              setCheckModify={setCheckModify}
               handleClose={handleClose}
             />
           </ModalContent>

@@ -5,7 +5,6 @@ type ModalJsxTypes = {
   handleAddBook: any;
   handleType: any;
   handleClose: any;
-  checkModify: Boolean;
   setToggle: React.Dispatch<React.SetStateAction<Boolean>>;
   toggle: Boolean;
 };

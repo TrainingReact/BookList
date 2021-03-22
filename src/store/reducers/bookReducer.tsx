@@ -13,11 +13,13 @@ interface Book {
 interface BookState {
   books: Book[];
   modalChecker: boolean;
+  modalCheckerModify: boolean;
 }
 
 const initialState = {
   books: [],
   modalChecker: false,
+  modalCheckerModify: false,
 } as BookState;
 
 const bookSlice = createSlice({
@@ -38,6 +40,9 @@ const bookSlice = createSlice({
     toggleModalChecker(state, action) {
       state.modalChecker = action.payload;
     },
+    toggleModalCheckerModify(state, action) {
+      state.modalCheckerModify = action.payload;
+    },
   },
 });
 
@@ -46,6 +51,7 @@ export const {
   deleteBook,
   modifyBook,
   toggleModalChecker,
+  toggleModalCheckerModify,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;
