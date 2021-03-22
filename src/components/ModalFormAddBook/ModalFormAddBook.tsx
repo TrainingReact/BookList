@@ -1,9 +1,8 @@
 import ModalProps from "../../types/ModalTypes/ModalTypes";
-import MainModalForm from "./MainModalForm/MainModalForm";
+import MainModalForm from "../MainModalForm/MainModalForm";
 import { Modal, ModalContent } from "./ModalFormAddBookStyle";
+import { useSelector } from "react-redux";
 const ModalFormAddBook: React.FC<ModalProps> = ({
-  checkClicked,
-  setCheckClicked,
   checkModify,
   handleClose,
   setCheckModify,
@@ -11,9 +10,11 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
   idBookToModify,
   setBook,
 }) => {
+  const checkerModal = useSelector((state: any) => state.books.modalChecker);
+
   return (
     <div>
-      {checkClicked ? (
+      {checkerModal ? (
         <Modal className={"fade"}>
           <ModalContent>
             <MainModalForm
@@ -23,7 +24,6 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
               checkModify={checkModify}
               setCheckModify={setCheckModify}
               handleClose={handleClose}
-              setCheckClicked={setCheckClicked}
             />
           </ModalContent>
         </Modal>

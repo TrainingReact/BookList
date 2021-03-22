@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addBook, modifyBook } from "../../../store/reducers/bookReducer";
-import ModalJsx from "./ModalJsx/ModalJsx";
-import MainModalFormPropsTypes from "../../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
-import getKeys from "../../../utils/getKeysFunc";
-import setError from "../../../utils/setErrorFunc";
-import clearAllField from "./../../../utils/clearAllField";
-import Field from "../.../../../../types/FieldTypes/FieldTypes";
+import {
+  addBook,
+  modifyBook,
+  toggleModalChecker,
+} from "../../store/reducers/bookReducer";
+import ModalJsx from "../ModalJsx/ModalJsx";
+import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
+import getKeys from "../../utils/getKeysFunc";
+import setError from "../../utils/setErrorFunc";
+import clearAllField from "../../utils/clearAllField";
+import Field from "../../types/FieldTypes/FieldTypes";
 
 export interface Obj {
   id: number;
@@ -18,7 +22,6 @@ export interface Obj {
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   handleClose,
-  setCheckClicked,
   setCheckModify,
   checkModify,
   book,
@@ -46,12 +49,12 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
         dispatch(modifyBook({ book: book, id: idBookToModify }));
         setCheckModify(false);
         clearAllField(book, setBook);
-        setCheckClicked(false);
+        dispatch(toggleModalChecker(false));
       } else {
         dispatch(addBook(book));
         clearAllField(book, setBook);
         if (!toggle) {
-          setCheckClicked(false);
+          dispatch(toggleModalChecker(false));
         }
       }
     } else {

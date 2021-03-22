@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import "./AddBookButtonStyle.tsx";
 import ModalFormAddBook from "../ModalFormAddBook/ModalFormAddBook";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AddBookButtonTypes from "../../types/AddBookButtonTypes/AddBookButtonTypes";
 import Wrapper, { ContainerIcon } from "./AddBookButtonStyle";
+import { toggleModalChecker } from "../../store/reducers/bookReducer";
 const AddBookButton: React.FC<AddBookButtonTypes> = ({
-  setCheckClicked,
-  checkClicked,
   handleClose,
   setCheckModify,
   checkModify,
@@ -15,22 +14,14 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
   setBook,
   idBookToModify,
 }) => {
-  const [checkOver, setCheckOver] = useState<Boolean>(false);
-
   const store = useSelector((state: any) => state.books.books);
+
+  const dispatch = useDispatch();
 
   const checkStoreLength = store && store.length;
 
   const handleClick = () => {
-    setCheckClicked(true);
-  };
-
-  const handleMouseOver = () => {
-    setCheckOver(true);
-  };
-
-  const handleMouseOut = () => {
-    setCheckOver(false);
+    dispatch(toggleModalChecker(true));
   };
 
   return (
@@ -41,10 +32,7 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
         color={"red"}
         onClick={handleClick}
       >
-        <AddCircleRoundedIcon
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-        />
+        <AddCircleRoundedIcon />
       </ContainerIcon>
       <ModalFormAddBook
         setBook={setBook}
@@ -53,8 +41,6 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
         setCheckModify={setCheckModify}
         checkModify={checkModify}
         handleClose={handleClose}
-        setCheckClicked={setCheckClicked}
-        checkClicked={checkClicked}
       />
     </Wrapper>
   );
