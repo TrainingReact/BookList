@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 import Field from "../../types/FieldTypes/FieldTypes";
 import axios, { AxiosResponse } from "axios";
+import { Obj } from "../../components/MainModalForm/MainModalForm";
 interface Book {
   id: number;
   name: Field;
@@ -33,24 +34,19 @@ export const getBooks: AsyncThunk<
   });
 });
 
-export const addBooks: AsyncThunk<
-  AxiosResponse<any>,
-  void,
-  {}
-> = createAsyncThunk("books/addBooks", async () => {
-  return axios.post("http://localhost:3000/books").then((res) => {
-    console.log("res", res);
-    return res;
-  });
-});
+export const addBooks: AsyncThunk<any, Obj, {}> = createAsyncThunk(
+  "books/addBooks",
+  async (book: Obj) => {
+    return axios.post("http://localhost:3000/books", book).then((re: any) => {
+      return re.data;
+    });
+  }
+);
 
 const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    addBook(state, action) {
-      state.books.push(action.payload);
-    },
     deleteBook(state, action) {
       state.books = state.books.filter((book) => book.id !== action.payload);
     },
@@ -81,7 +77,7 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [addBooks.fulfilled.toString()]: (state, action) => {
-      state.books = action.payload;
+      state.books.push(action.payload);
       state.status = "success";
     },
     [addBooks.rejected.toString()]: (state, action) => {
@@ -91,7 +87,6 @@ const bookSlice = createSlice({
 });
 
 export const {
-  addBook,
   deleteBook,
   modifyBook,
   toggleModalChecker,

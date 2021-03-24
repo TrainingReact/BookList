@@ -8,7 +8,9 @@ const LabelListBookField: React.FC<LabelListBookFieldTypes> = ({
   return (
     <ItemMap>
       <SpanListLabel>{label} :</SpanListLabel>
-      <ValueList>{label === "author" ? val.author : val.gender}</ValueList>
+      <ValueList>
+        {label === "author" ? val?.author?.value : val?.gender?.value}
+      </ValueList>
     </ItemMap>
   );
 };

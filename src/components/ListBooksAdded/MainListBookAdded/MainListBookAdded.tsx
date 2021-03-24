@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
-import ValMapped from "../../../types/ValMappedTypes/ValMappedTypes";
 import LabelListBookField from "./LabelListBookField/LabelListBookField";
 import MainListBookAddedTypes from "../../../types/ListBookAddedTypes/ListBookAddedTypes";
 import {
@@ -26,8 +25,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   return (
     <>
       {books && books.length > 0 ? (
-        books.map((val: ValMapped, index: number) => {
-          console.log("val", val);
+        books.map((val: any, index: number) => {
           return (
             <div key={index}>
               <Header
@@ -35,7 +33,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                   index > 0 ? "borderTopRightRadius" : "borderTopLeftRadius"
                 }
               >
-                <NameHeaderText>{val.name}</NameHeaderText>
+                <NameHeaderText>{val?.name?.value}</NameHeaderText>
               </Header>
               <WrapperItem
                 className={
@@ -52,7 +50,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                       e.currentTarget.src =
                         "https://pngimg.com/uploads/book/book_PNG51090.png";
                     }}
-                    src={String(val.img)}
+                    src={String(val?.img?.value)}
                   />
                 </ContImg>
 
@@ -61,11 +59,11 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                 <LabelListBookField val={val} label="gender" />
 
                 <ContItemMapFlexIcon>
-                  <CursorPointer onClick={() => handleModify(val.id)}>
+                  <CursorPointer onClick={() => handleModify(val.book.id)}>
                     <CreateIcon />
                   </CursorPointer>
                   <CursorPointerDelete
-                    onClick={() => handleDelete(val && val.id)}
+                    onClick={() => handleDelete(val && val.book.id)}
                   >
                     <DeleteIcon />
                   </CursorPointerDelete>
