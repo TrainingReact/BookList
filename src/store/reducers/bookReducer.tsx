@@ -1,7 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { setTextRange } from "typescript";
+import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 import Field from "../../types/FieldTypes/FieldTypes";
-
+import axios, { AxiosResponse } from "axios";
 interface Book {
   id: number;
   name: Field;
@@ -10,17 +9,40 @@ interface Book {
   img: Field;
 }
 
-interface BookState {
+export interface BookState {
   books: Book[];
   modalChecker: boolean;
   modalCheckerModify: boolean;
+  status: string;
 }
 
 const initialState = {
   books: [],
   modalChecker: false,
   modalCheckerModify: false,
+  status: "",
 } as BookState;
+
+export const getBooks: AsyncThunk<
+  AxiosResponse<any>,
+  void,
+  {}
+> = createAsyncThunk("books/getBooks", async () => {
+  return axios.get("http://localhost:3000/books").then((res) => {
+    return res.data;
+  });
+});
+
+export const addBooks: AsyncThunk<
+  AxiosResponse<any>,
+  void,
+  {}
+> = createAsyncThunk("books/addBooks", async () => {
+  return axios.post("http://localhost:3000/books").then((res) => {
+    console.log("res", res);
+    return res;
+  });
+});
 
 const bookSlice = createSlice({
   name: "books",
@@ -42,6 +64,28 @@ const bookSlice = createSlice({
     },
     toggleModalCheckerModify(state, action) {
       state.modalCheckerModify = action.payload;
+    },
+  },
+  extraReducers: {
+    [getBooks.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [getBooks.fulfilled.toString()]: (state, action) => {
+      state.books = action.payload;
+      state.status = "success";
+    },
+    [getBooks.rejected.toString()]: (state, action) => {
+      state.status = "failed";
+    },
+    [addBooks.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [addBooks.fulfilled.toString()]: (state, action) => {
+      state.books = action.payload;
+      state.status = "success";
+    },
+    [addBooks.rejected.toString()]: (state, action) => {
+      state.status = "failed";
     },
   },
 });

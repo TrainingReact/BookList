@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addBook,
   modifyBook,
   toggleModalChecker,
   toggleModalCheckerModify,
@@ -54,7 +53,7 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
         clearAllField(book, setBook);
         dispatch(toggleModalChecker(false));
       } else {
-        dispatch(addBook(book));
+        // dispatch(addBook(book));
         clearAllField(book, setBook);
         if (!toggle) {
           dispatch(toggleModalChecker(false));

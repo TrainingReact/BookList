@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddBookButton from "../../components/AddBookButton/AddBookButton";
 import ListBooksAdded from "../../components/ListBooksAdded/ListBooksAdded";
 import { Obj } from "../../components/MainModalForm/MainModalForm";
 import clearAllField from "../../utils/clearAllField";
 import setError from "../../utils/setErrorFunc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  getBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
+
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
+
+  const books = useSelector((state: any) => state.books.books);
+
+  console.log("books", books);
 
   const dispatch = useDispatch();
 
@@ -29,6 +35,10 @@ const Index = () => {
     dispatch(toggleModalCheckerModify(false));
     setError(book, setBook, val);
   };
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
 
   return (
     <div>

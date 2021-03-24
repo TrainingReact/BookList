@@ -8,6 +8,11 @@ interface WrapperItemPropsTypes {
   className: string;
 }
 
+interface ImgMapListTypeProps {
+  /*  src: string;
+  onError?: any; */
+}
+
 export const Header = styled.div<HeaderPropsTypes>`
   background-color: #776eb1;
   padding: 10px;
@@ -74,7 +79,7 @@ export const WrapperItem = styled.div<WrapperItemPropsTypes>`
   }
 `;
 
-export const ImgMapList = styled.img`
+export const ImgMapList = styled.img<ImgMapListTypeProps>`
   max-width: 50px;
   max-height: 50px;
 `;
