@@ -16,8 +16,6 @@ const Index = () => {
 
   const books = useSelector((state: any) => state.books.books);
 
-  // const status = useSelector((state: any) => state.books.status);
-
   console.log("books in index", books);
 
   const dispatch = useDispatch();

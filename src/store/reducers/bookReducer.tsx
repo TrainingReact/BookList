@@ -111,7 +111,6 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [deleteBooks.fulfilled.toString()]: (state, action) => {
-      console.log("action.payload.id", action.payload);
       state.books = state.books.filter((book) => {
         return book.id !== action.payload;
       });
