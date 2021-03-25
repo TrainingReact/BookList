@@ -3,15 +3,7 @@ import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
 import { addBooks } from "../../asyncCallThunkToolkit/addBooks";
 import { updateBooks } from "../../asyncCallThunkToolkit/updateBooks";
 import { deleteBooks } from "../../asyncCallThunkToolkit/deleteBooks";
-import { Book } from "../../types/Book/Book";
-
-export interface BookState {
-  books: Book[];
-  modalChecker: boolean;
-  modalCheckerModify: boolean;
-  status: string;
-}
-
+import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
 const initialState = {
   books: [],
   modalChecker: false,
