@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
-import ValMapped from "../../../types/ValMappedTypes/ValMappedTypes";
 import LabelListBookField from "./LabelListBookField/LabelListBookField";
 import MainListBookAddedTypes from "../../../types/ListBookAddedTypes/ListBookAddedTypes";
 import {
@@ -15,17 +14,18 @@ import {
   CursorPointerDelete,
   AddBookSpan,
 } from "./MainListBookAddedStyle";
-
+import { useSelector } from "react-redux";
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
-  store,
   lastItem,
   handleModify,
   handleDelete,
 }) => {
+  const books = useSelector((state: any) => state.books.books);
+
   return (
     <>
-      {store && store.length > 0 ? (
-        store.map((val: ValMapped, index: number) => {
+      {books && books.length > 0 ? (
+        books.map((val: any, index: number) => {
           return (
             <div key={index}>
               <Header
@@ -33,7 +33,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                   index > 0 ? "borderTopRightRadius" : "borderTopLeftRadius"
                 }
               >
-                <NameHeaderText>{val.name.value}</NameHeaderText>
+                <NameHeaderText>{val?.name?.value}</NameHeaderText>
               </Header>
               <WrapperItem
                 className={
@@ -50,7 +50,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                       e.currentTarget.src =
                         "https://pngimg.com/uploads/book/book_PNG51090.png";
                     }}
-                    src={val.img.value}
+                    src={String(val?.img?.value)}
                   />
                 </ContImg>
 

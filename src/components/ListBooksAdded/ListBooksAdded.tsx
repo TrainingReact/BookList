@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import React from "react";
 import {
-  deleteBook,
+  deleteBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
@@ -21,7 +21,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
   const lastItem = store && store.length;
 
   const handleDelete = (id: number) => {
-    dispatch(deleteBook(id));
+    dispatch(deleteBooks(id));
     if (store.length === 1)
       alert("you have read all the books! great keep it up!");
   };
