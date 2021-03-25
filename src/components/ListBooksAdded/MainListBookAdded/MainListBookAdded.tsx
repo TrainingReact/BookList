@@ -59,11 +59,11 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                 <LabelListBookField val={val} label="gender" />
 
                 <ContItemMapFlexIcon>
-                  <CursorPointer onClick={() => handleModify(val.book.id)}>
+                  <CursorPointer onClick={() => handleModify(val.id)}>
                     <CreateIcon />
                   </CursorPointer>
                   <CursorPointerDelete
-                    onClick={() => handleDelete(val && val.book.id)}
+                    onClick={() => handleDelete(val && val.id)}
                   >
                     <DeleteIcon />
                   </CursorPointerDelete>

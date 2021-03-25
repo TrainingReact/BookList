@@ -43,18 +43,30 @@ export const addBooks: AsyncThunk<any, Obj, {}> = createAsyncThunk(
   }
 );
 
+export const updateBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
+  "books/updateBooks",
+  async (book: any) => {
+    return axios
+      .patch(`http://localhost:3000/books/${book?.id}`, book?.book)
+      .then((re: any) => {
+        return re.data;
+      });
+  }
+);
+
+export const deleteBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
+  "books/deleteBooks",
+  async (id: any) => {
+    return axios.delete(`http://localhost:3000/books/${id}`).then((re: any) => {
+      return id;
+    });
+  }
+);
+
 const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    deleteBook(state, action) {
-      state.books = state.books.filter((book) => book.id !== action.payload);
-    },
-    modifyBook(state, action) {
-      state.books = state.books.map((val) => {
-        return val.id === action.payload.id ? (val = action.payload.book) : val;
-      });
-    },
     toggleModalChecker(state, action) {
       state.modalChecker = action.payload;
     },
@@ -83,12 +95,35 @@ const bookSlice = createSlice({
     [addBooks.rejected.toString()]: (state, action) => {
       state.status = "failed";
     },
+    [updateBooks.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [updateBooks.fulfilled.toString()]: (state, action) => {
+      state.books = state.books.map((val) => {
+        return val.id === action.payload.id ? (val = action.payload) : val;
+      });
+      state.status = "success";
+    },
+    [updateBooks.rejected.toString()]: (state, action) => {
+      state.status = "failed";
+    },
+    [deleteBooks.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [deleteBooks.fulfilled.toString()]: (state, action) => {
+      console.log("action.payload.id", action.payload);
+      state.books = state.books.filter((book) => {
+        return book.id !== action.payload;
+      });
+      state.status = "success";
+    },
+    [deleteBooks.rejected.toString()]: (state, action) => {
+      state.status = "failed";
+    },
   },
 });
 
 export const {
-  deleteBook,
-  modifyBook,
   toggleModalChecker,
   toggleModalCheckerModify,
 } = bookSlice.actions;
