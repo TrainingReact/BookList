@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addBooks,
-  updateBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
@@ -12,6 +10,8 @@ import getKeys from "../../utils/getKeysFunc";
 import setError from "../../utils/setErrorFunc";
 import clearAllField from "../../utils/clearAllField";
 import Field from "../../types/FieldTypes/FieldTypes";
+import { addBooks } from "../../asyncCallThunkToolkit/addBooks";
+import { updateBooks } from "../../asyncCallThunkToolkit/updateBooks";
 
 export interface Obj {
   id: number;

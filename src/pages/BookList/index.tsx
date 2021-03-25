@@ -6,10 +6,10 @@ import clearAllField from "../../utils/clearAllField";
 import setError from "../../utils/setErrorFunc";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
+import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
 
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);

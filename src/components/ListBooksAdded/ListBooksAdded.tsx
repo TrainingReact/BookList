@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import React from "react";
 import {
-  deleteBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
@@ -11,6 +10,7 @@ import getKeys from "../../utils/getKeysFunc";
 import { objKeys } from "../../types/objKeysTypes/objKeysType";
 import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
+import { deleteBooks } from "../../asyncCallThunkToolkit/deleteBooks";
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
   setIdBookToModify,
   book,

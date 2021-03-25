@@ -1,14 +1,9 @@
-import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
-import Field from "../../types/FieldTypes/FieldTypes";
-import axios, { AxiosResponse } from "axios";
-import { Obj } from "../../components/MainModalForm/MainModalForm";
-interface Book {
-  id: number;
-  name: Field;
-  author: Field;
-  gender: Field;
-  img: Field;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
+import { addBooks } from "../../asyncCallThunkToolkit/addBooks";
+import { updateBooks } from "../../asyncCallThunkToolkit/updateBooks";
+import { deleteBooks } from "../../asyncCallThunkToolkit/deleteBooks";
+import { Book } from "../../types/Book/Book";
 
 export interface BookState {
   books: Book[];
@@ -23,45 +18,6 @@ const initialState = {
   modalCheckerModify: false,
   status: "",
 } as BookState;
-
-export const getBooks: AsyncThunk<
-  AxiosResponse<any>,
-  void,
-  {}
-> = createAsyncThunk("books/getBooks", async () => {
-  return axios.get("http://localhost:3000/books").then((res) => {
-    return res.data;
-  });
-});
-
-export const addBooks: AsyncThunk<any, Obj, {}> = createAsyncThunk(
-  "books/addBooks",
-  async (book: Obj) => {
-    return axios.post("http://localhost:3000/books", book).then((re: any) => {
-      return re.data;
-    });
-  }
-);
-
-export const updateBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
-  "books/updateBooks",
-  async (book: any) => {
-    return axios
-      .patch(`http://localhost:3000/books/${book?.id}`, book?.book)
-      .then((re: any) => {
-        return re.data;
-      });
-  }
-);
-
-export const deleteBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
-  "books/deleteBooks",
-  async (id: any) => {
-    return axios.delete(`http://localhost:3000/books/${id}`).then((re: any) => {
-      return id;
-    });
-  }
-);
 
 const bookSlice = createSlice({
   name: "books",
