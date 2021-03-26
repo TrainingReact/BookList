@@ -4,7 +4,7 @@ import ListBooksAdded from "../../components/ListBooksAdded/ListBooksAdded";
 import { Obj } from "../../components/MainModalForm/MainModalForm";
 import clearAllField from "../../utils/clearAllField";
 import setError from "../../utils/setErrorFunc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   toggleModalChecker,
   toggleModalCheckerModify,
@@ -13,10 +13,6 @@ import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
 
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
-
-  const books = useSelector((state: any) => state.books.books);
-
-  console.log("books in index", books);
 
   const dispatch = useDispatch();
 

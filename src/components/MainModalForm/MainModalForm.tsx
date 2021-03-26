@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  toggleModalChecker,
-  toggleModalCheckerModify,
-} from "../../store/reducers/bookReducer";
 import ModalJsx from "../ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
-import getKeys from "../../utils/getKeysFunc";
-import setError from "../../utils/setErrorFunc";
-import clearAllField from "../../utils/clearAllField";
 import Field from "../../types/FieldTypes/FieldTypes";
-import { addBooks } from "../../asyncCallThunkToolkit/addBooks";
-import { updateBooks } from "../../asyncCallThunkToolkit/updateBooks";
-
+import { handleFormSubmit } from "../../utils/handleSubmitForm";
 export interface Obj {
   id: number;
   name: Field;
@@ -37,32 +28,15 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   let val = "required field";
 
   const handleAddBook = () => {
-    setError(book, setBook, val);
-
-    const allFill = getKeys(book).every((key) => {
-      if (key === "id") {
-        return true;
-      } else {
-        return book[key].value !== "";
-      }
-    });
-
-    if (allFill) {
-      if (checkerModalModify) {
-        dispatch(updateBooks({ book: book, id: idBookToModify }));
-        dispatch(toggleModalCheckerModify(false));
-        clearAllField(book, setBook);
-        dispatch(toggleModalChecker(false));
-      } else {
-        dispatch(addBooks(book));
-        clearAllField(book, setBook);
-        if (!toggle) {
-          dispatch(toggleModalChecker(false));
-        }
-      }
-    } else {
-      alert("fill in all fields M8");
-    }
+    handleFormSubmit(
+      book,
+      val,
+      setBook,
+      dispatch,
+      checkerModalModify,
+      idBookToModify,
+      toggle
+    );
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {

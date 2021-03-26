@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 
 export const updateBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
