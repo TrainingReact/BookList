@@ -5,8 +5,8 @@ import {
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../store/reducers/bookReducer";
-import { updateBooks } from "../asyncCallThunkToolkit/updateBooks";
-import { addBooks } from "../asyncCallThunkToolkit/addBooks";
+import { updateBooks } from "../asyncCallThunkToolkit/Books/updateBooks";
+import { addBooks } from "../asyncCallThunkToolkit/Books/addBooks";
 import { Obj } from "../components/MainModalForm/MainModalForm";
 import { Dispatch } from "redux";
 

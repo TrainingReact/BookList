@@ -9,7 +9,8 @@ import {
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
-import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
+import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
+import Header from "../../components/Header/Header";
 
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
@@ -38,6 +39,7 @@ const Index = () => {
 
   return (
     <div>
+      <Header />
       <AddBookButton
         idBookToModify={idBookToModify}
         handleClose={handleClose}

@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
-import { addBooks } from "../../asyncCallThunkToolkit/addBooks";
-import { updateBooks } from "../../asyncCallThunkToolkit/updateBooks";
-import { deleteBooks } from "../../asyncCallThunkToolkit/deleteBooks";
+import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
+import { addBooks } from "../../asyncCallThunkToolkit/Books/addBooks";
+import { updateBooks } from "../../asyncCallThunkToolkit/Books/updateBooks";
+import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
-const initialState = {
+
+export const initialState = {
   books: [],
+  booksAddedToCart: [],
   modalChecker: false,
   modalCheckerModify: false,
   status: "",
+  bookAdddedToCart: [],
 } as BookState;
 
 const bookSlice = createSlice({

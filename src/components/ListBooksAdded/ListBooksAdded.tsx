@@ -10,7 +10,7 @@ import getKeys from "../../utils/getKeysFunc";
 import { objKeys } from "../../types/objKeysTypes/objKeysType";
 import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
-import { deleteBooks } from "../../asyncCallThunkToolkit/deleteBooks";
+import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
   setIdBookToModify,
   book,
@@ -42,6 +42,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
         }));
       }
     });
+
     setIdBookToModify(id && id);
     dispatch(toggleModalCheckerModify(true));
     dispatch(toggleModalChecker(true));
@@ -53,7 +54,6 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
         handleDelete={handleDelete}
         handleModify={handleModify}
         lastItem={lastItem}
-        store={store}
       />
     </ContMainListBookAdded>
   );

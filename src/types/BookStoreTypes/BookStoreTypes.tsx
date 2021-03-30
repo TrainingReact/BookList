@@ -5,4 +5,5 @@ export interface BookState {
   modalChecker: boolean;
   modalCheckerModify: boolean;
   status: string;
+  bookAdddedToCart: Book[];
 }

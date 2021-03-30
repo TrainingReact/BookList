@@ -15,17 +15,28 @@ import {
   AddBookSpan,
 } from "./MainListBookAddedStyle";
 import { useSelector } from "react-redux";
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
   handleModify,
   handleDelete,
 }) => {
-  const books = useSelector((state: any) => state.books.books);
+  const booksFromStore = useSelector((state: any) => state.books.books);
+
+  const handleAddBookToCart = (id: number) => {
+    let bookToAddToTheCart: string = "";
+
+    booksFromStore.find((val: any) =>
+      val.id === id ? (bookToAddToTheCart = val) : null
+    );
+    console.log("who u are ? ", bookToAddToTheCart);
+  };
 
   return (
     <>
-      {books && books.length > 0 ? (
-        books.map((val: any, index: number) => {
+      {booksFromStore && booksFromStore.length > 0 ? (
+        booksFromStore.map((val: any, index: number) => {
           return (
             <div key={index}>
               <Header
@@ -68,6 +79,12 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                     <DeleteIcon />
                   </CursorPointerDelete>
                 </ContItemMapFlexIcon>
+                <AddCircleRoundedIcon
+                  onClick={() => handleAddBookToCart(val.id)}
+                  style={{ cursor: "pointer" }}
+                  fontSize="large"
+                  color="primary"
+                />
               </WrapperItem>
             </div>
           );
