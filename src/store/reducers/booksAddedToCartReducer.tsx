@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
 import { BooksAddedToCartTypes } from "../../types/BooksAddedToCartTypes/BooksAddedToCartTypes";
 import { getBooksAddedToCart } from "../../asyncCallThunkToolkit/BooksAdded/getBooksAddedToCart";
+import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
 const initialState = {
   booksAddedToCart: [],
   status: "",
@@ -30,6 +31,19 @@ const booksAddedToCartSlice = createSlice({
       state.status = "success";
     },
     [getBooksAddedToCart.rejected.toString()]: (state, action) => {
+      state.status = "failed";
+    },
+    [deleteBooksToCart.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [deleteBooksToCart.fulfilled.toString()]: (state, action) => {
+      console.log("cioa");
+      state.booksAddedToCart = state.booksAddedToCart.filter((book) => {
+        return book.id !== action.payload;
+      });
+      state.status = "success";
+    },
+    [deleteBooksToCart.rejected.toString()]: (state, action) => {
       state.status = "failed";
     },
   },

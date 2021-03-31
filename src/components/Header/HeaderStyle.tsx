@@ -13,6 +13,8 @@ export const WrapperHeader = styled.div`
 export const ContainerIconCart = styled.div`
   width: 100%;
   display: flex;
+  height: 65px;
+  align-items: center;
   justify-content: flex-end;
   margin-right: 25px;
 `;
