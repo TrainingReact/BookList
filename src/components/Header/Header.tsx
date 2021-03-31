@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   WrapperHeader,
   ContainerIconCart,
@@ -8,9 +9,10 @@ import {
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Obj } from "../MainModalForm/MainModalForm";
 import { ImgMapList } from "../ListBooksAdded/MainListBookAdded/MainListBookAddedStyle";
-
+import { getBooksAddedToCart } from "../../asyncCallThunkToolkit/BooksAdded/getBooksAddedToCart";
 const Header = () => {
   const [showDropDown, setShowDropDown] = useState<Boolean>(false);
 
@@ -20,40 +22,48 @@ const Header = () => {
 
   const store = useSelector((state: any) => state.books.books.length);
 
-  const books = useSelector((state: any) => state.books.books);
+  const dispatch = useDispatch();
+
+  const books = useSelector(
+    (state: any) => state.booksAddedToCart.booksAddedToCart
+  );
+
+  const length: number = books.length;
+
+  useEffect(() => {
+    dispatch(getBooksAddedToCart());
+  }, [dispatch]);
 
   const handleOutCart = () => {
-    // setShowDropDown(false);
+    setShowDropDown(false);
   };
 
   return (
     <WrapperHeader>
       <ContainerIconCart>
-        <WrapperWidgetCounter>{store}</WrapperWidgetCounter>
+        <WrapperWidgetCounter>{length}</WrapperWidgetCounter>
         <ShoppingCartIcon onMouseOver={handleOverCart} fontSize="large" />
       </ContainerIconCart>
-      {showDropDown ? (
-        <WrapperDropDown onMouseOut={handleOutCart}>
-          <div>
-            {books.map((val: Obj, index: number) => {
-              return (
-                <DropDownContentWrapper key={index}>
-                  <ImgMapList
-                    className="imgCart"
-                    alt="dio cane"
-                    onError={(
-                      e: React.SyntheticEvent<HTMLImageElement, Event>
-                    ) => {
-                      e.currentTarget.src =
-                        "https://pngimg.com/uploads/book/book_PNG51090.png";
-                    }}
-                    src={String(val.img.value)}
-                  />
-                  <div> {val.name.value} </div>
-                </DropDownContentWrapper>
-              );
-            })}
-          </div>
+      {showDropDown && length > 0 ? (
+        <WrapperDropDown>
+          {books.map((val: Obj, index: number) => {
+            return (
+              <DropDownContentWrapper key={index}>
+                <ImgMapList
+                  className="imgCart"
+                  alt="dio cane"
+                  onError={(
+                    e: React.SyntheticEvent<HTMLImageElement, Event>
+                  ) => {
+                    e.currentTarget.src =
+                      "https://pngimg.com/uploads/book/book_PNG51090.png";
+                  }}
+                  src={String(val.img.value)}
+                />
+                <div> {val.name.value} </div>
+              </DropDownContentWrapper>
+            );
+          })}
         </WrapperDropDown>
       ) : null}
     </WrapperHeader>

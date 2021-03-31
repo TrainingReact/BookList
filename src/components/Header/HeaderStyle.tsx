@@ -34,9 +34,7 @@ export const WrapperWidgetCounter = styled.div`
 `;
 
 export const WrapperDropDown = styled.div`
-  display: flex;
   background: #e1e1e1;
-  justify-content: flex-end;
   min-width: 60px;
   max-width: 60px;
   padding: 10px;

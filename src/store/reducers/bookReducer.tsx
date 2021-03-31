@@ -7,11 +7,9 @@ import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
 
 export const initialState = {
   books: [],
-  booksAddedToCart: [],
   modalChecker: false,
   modalCheckerModify: false,
   status: "",
-  bookAdddedToCart: [],
 } as BookState;
 
 const bookSlice = createSlice({

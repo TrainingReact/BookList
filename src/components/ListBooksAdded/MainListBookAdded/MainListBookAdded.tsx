@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
 import LabelListBookField from "./LabelListBookField/LabelListBookField";
@@ -16,6 +16,8 @@ import {
 } from "./MainListBookAddedStyle";
 import { useSelector } from "react-redux";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import { useDispatch } from "react-redux";
+import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
@@ -24,13 +26,24 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
 }) => {
   const booksFromStore = useSelector((state: any) => state.books.books);
 
-  const handleAddBookToCart = (id: number) => {
-    let bookToAddToTheCart: string = "";
+  const booksAdded = useSelector(
+    (state: any) => state.booksAddedToCart.booksAddedToCart
+  );
 
-    booksFromStore.find((val: any) =>
-      val.id === id ? (bookToAddToTheCart = val) : null
-    );
-    console.log("who u are ? ", bookToAddToTheCart);
+  const dispatch = useDispatch();
+
+  const handleAddBookToCart = (id: number) => {
+    let bookToAddOnTheCart: any;
+
+    bookToAddOnTheCart = booksFromStore.find((val: any) => {
+      return val.id === id;
+    });
+
+    const result = booksAdded.find((val: any) => {
+      return val.id === id;
+    });
+
+    if (result === undefined) dispatch(addBooksToCart(bookToAddOnTheCart));
   };
 
   return (
