@@ -43,7 +43,10 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
       return val.id === id;
     });
 
-    if (result === undefined) dispatch(addBooksToCart(bookToAddOnTheCart));
+    if (result === undefined) {
+      dispatch(addBooksToCart(bookToAddOnTheCart));
+    } else {
+    }
   };
 
   return (

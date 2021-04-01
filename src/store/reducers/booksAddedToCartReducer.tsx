@@ -37,7 +37,6 @@ const booksAddedToCartSlice = createSlice({
       state.status = "loading";
     },
     [deleteBooksToCart.fulfilled.toString()]: (state, action) => {
-      console.log("cioa");
       state.booksAddedToCart = state.booksAddedToCart.filter((book) => {
         return book.id !== action.payload;
       });

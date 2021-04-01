@@ -36,8 +36,6 @@ const Header = () => {
 
   const location = useLocation();
 
-  console.log(location.pathname);
-
   useEffect(() => {
     dispatch(getBooksAddedToCart());
   }, [dispatch]);
@@ -47,13 +45,13 @@ const Header = () => {
   };
 
   return (
-    <WrapperHeader>
-      <ContainerIconCart>
+    <WrapperHeader onMouseLeave={handleOutCart}>
+      <ContainerIconCart onMouseOver={handleOverCart}>
         <WrapperWidgetCounter>{length}</WrapperWidgetCounter>
-        <ShoppingCartIcon onMouseOver={handleOverCart} fontSize="large" />
+        <ShoppingCartIcon fontSize="large" />
       </ContainerIconCart>
-      {showDropDown && length > 0 ? (
-        <WrapperDropDown>
+      {showDropDown && (
+        <WrapperDropDown onMouseLeave={handleOutCart}>
           {books.map((val: Obj, index: number) => {
             return (
               <DropDownContentWrapper key={index}>
@@ -73,15 +71,12 @@ const Header = () => {
             );
           })}
           {location.pathname !== "/shoppingCart" ? (
-            <div
-              onClick={() => history.push("/shoppingCart")}
-              style={{ marginTop: "20px" }}
-            >
+            <div onClick={() => history.push("/shoppingCart")}>
               <button>view more...</button>
             </div>
           ) : null}
         </WrapperDropDown>
-      ) : null}
+      )}
     </WrapperHeader>
   );
 };

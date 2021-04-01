@@ -66,11 +66,21 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
-            label="img"
-            name="img"
-            placeholder="img"
-            error={book.img.error}
-            val={book.img.value}
+            label="gender"
+            name="gender"
+            placeholder="gender"
+            error={book.gender.error}
+            val={book.gender.value}
+            handleType={handleType}
+          />
+        </DirectionColumn>
+        <DirectionColumn>
+          <Input
+            label="quantity"
+            name="quantity"
+            placeholder="quantity"
+            error={book.quantity.error}
+            val={book.quantity.value}
             handleType={handleType}
           />
           <ContImg>

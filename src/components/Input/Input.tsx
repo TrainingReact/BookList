@@ -20,7 +20,7 @@ const Input: React.FC<InputTypes> = ({
         value={val}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleType(e)}
         name={name}
-        type="text"
+        type="number"
       />
 
       <div>

@@ -23,8 +23,6 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
     (state: any) => state.booksAddedToCart
   );
 
-  console.log(storeFromBooksCart);
-
   const dispatch = useDispatch();
   const lastItem = store && store.length;
 

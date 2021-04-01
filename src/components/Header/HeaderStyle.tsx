@@ -37,14 +37,16 @@ export const WrapperWidgetCounter = styled.div`
 
 export const WrapperDropDown = styled.div`
   background: #e1e1e1;
-  min-width: 60px;
-  max-width: 60px;
-  padding: 10px;
+  min-width: 100px;
+  max-width: 100px;
   border-radius: 10px;
   position: absolute;
   right: 10px;
   top: 60px;
-  z-index: 1;
+  z-index: 5;
+  padding: 5px;
+  border: 1px solid red;
+  height: 70px;
 `;
 
 export const DropDownContentWrapper = styled.div`

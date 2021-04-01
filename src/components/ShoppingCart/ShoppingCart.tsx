@@ -20,7 +20,6 @@ function ShoppingCart() {
 
   const handleDeleteItemFromShoppingCart = (id: number) => {
     dispatch(deleteBooksToCart(id));
-    console.log(store.length);
     // if (store.length === 1) hisotry.push("/");
   };
 
