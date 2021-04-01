@@ -80,7 +80,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
                 e.currentTarget.src =
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPBoJ-u5is_IuOgE2wj18XdIB94tsYhy6V-Q&usqp=CAU";
               }}
-              src={book.img.value}
+              src={String(book?.img?.value)}
             />
           </ContImg>
         </DirectionColumn>

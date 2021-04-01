@@ -1,7 +1,5 @@
-import { Book } from "../Book/Book";
-import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
-
+import { BookAddedToCartFieldTypes } from "../BookAddedToCartFieldTypes/BookAddedToCartFieldTypes";
 export interface BooksAddedToCartTypes {
-  booksAddedToCart: Book[];
+  booksAddedToCart: BookAddedToCartFieldTypes[];
   status: string;
 }
