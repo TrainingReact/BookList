@@ -5,4 +5,5 @@ export interface Book {
   author: Field;
   gender: Field;
   img: Field;
+  quantity: number;
 }

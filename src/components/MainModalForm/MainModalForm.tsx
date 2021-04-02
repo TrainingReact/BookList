@@ -4,13 +4,14 @@ import ModalJsx from "../ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
 import Field from "../../types/FieldTypes/FieldTypes";
 import { handleFormSubmit } from "../../utils/handleSubmitForm";
+
 export interface Obj {
   id: number;
   name: Field;
   author: Field;
   gender: Field;
   img: Field;
-  quantity: Field;
+  quantity: { value: number; error: string };
 }
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
@@ -41,11 +42,17 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isQuantity = e.currentTarget.name === "quantity";
+    const quantity =
+      isQuantity && Number(e.currentTarget.value) < 1
+        ? 1
+        : Number(e.currentTarget.value);
+
     setBook({
       ...book,
       id: Math.random(),
       [e.currentTarget.name]: {
-        value: e.currentTarget.value,
+        value: isQuantity ? quantity : e.currentTarget.value,
         error: "",
       },
     });

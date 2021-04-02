@@ -22,10 +22,12 @@ export const handleFormSubmit = (
   setError(book, setBook, val);
 
   const allFill = getKeys(book).every((key) => {
+    const check = key === "quantity";
+
     if (key === "id") {
       return true;
     } else {
-      return book[key].value !== "";
+      return check ? book.quantity.value > 0 : book[key].value !== "";
     }
   });
 
@@ -43,6 +45,8 @@ export const handleFormSubmit = (
       }
     }
   } else {
-    alert("fill in all fields M8");
+    alert(
+      "u might made a mistake , check if u fill all the field and the quantity of the book must be superior of 0..."
+    );
   }
 };

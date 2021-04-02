@@ -5,6 +5,7 @@ type InputTypes = {
   placeholder: string;
   name: any;
   label: string;
+  type: string;
 };
 
 export default InputTypes;

@@ -22,7 +22,7 @@ const Index = () => {
     author: { value: "", error: "" },
     gender: { value: "", error: "" },
     img: { value: "", error: "" },
-    quantity: { value: 0, error: "" },
+    quantity: { value: 1, error: "" },
   });
 
   const handleClose = () => {

@@ -8,10 +8,11 @@ const clearAllField = (
 ) => {
   getKeys(book).map((val: objKeys) => {
     if (val !== "id") {
+      const isQuantity = val === "quantity";
       setBook((prevState: any) => ({
         ...prevState,
         [val]: {
-          value: "",
+          value: isQuantity ? 1 : "",
           error: book[val].error,
         },
       }));

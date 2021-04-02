@@ -11,7 +11,14 @@ const initialState = {
 const booksAddedToCartSlice = createSlice({
   name: "booksAddedToCart",
   initialState,
-  reducers: {},
+  reducers: {
+    addQuantity(state, action) {
+      console.log(action.payload);
+      state.booksAddedToCart = state.booksAddedToCart.map((val: any) => {
+        return val.id === action.payload ? val.quantity.value + 1 : val;
+      });
+    },
+  },
   extraReducers: {
     [addBooksToCart.pending.toString()]: (state, action) => {
       state.status = "loading";
@@ -48,4 +55,5 @@ const booksAddedToCartSlice = createSlice({
   },
 });
 
+export const { addQuantity } = booksAddedToCartSlice.actions;
 export default booksAddedToCartSlice.reducer;

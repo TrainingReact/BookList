@@ -36,7 +36,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
 
   const handleModify = (id: number) => {
     getKeys(book).map((key: objKeys) => {
-      let valueOfObjToModify: string = "";
+      let valueOfObjToModify: string | number;
       store.find((val: any) =>
         val.id === id ? (valueOfObjToModify = val[key].value) : null
       );

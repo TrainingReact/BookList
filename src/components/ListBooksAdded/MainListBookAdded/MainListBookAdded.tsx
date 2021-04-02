@@ -81,9 +81,11 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                   />
                 </ContImg>
 
-                <LabelListBookField val={val} label="author" />
+                <LabelListBookField val={val.author.value} label="author" />
 
-                <LabelListBookField val={val} label="gender" />
+                <LabelListBookField val={val.gender.value} label="gender" />
+
+                <LabelListBookField val={val.quantity.value} label="quantity" />
 
                 <ContItemMapFlexIcon>
                   <CursorPointer onClick={() => handleModify(val.id)}>

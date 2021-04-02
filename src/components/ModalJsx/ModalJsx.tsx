@@ -2,7 +2,7 @@ import React from "react";
 import ModalJsxTypes from "../../types/ModalJsxTypes/ModalJsxTypes";
 import { useSelector } from "react-redux";
 import Input from "../Input/Input";
-import LabelSwitch from "../LabelSwitch/LabelSwitch";
+import LabelSwitch from "./LabelSwitch/LabelSwitch";
 import ButtonSubmit from "../ButtonModify/ButtonModify";
 import {
   DirectionColumn,
@@ -36,6 +36,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
       <WrapperForm>
         <DirectionColumn>
           <Input
+            type="text"
             label="name"
             name="name"
             placeholder="name"
@@ -46,6 +47,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
+            type="text"
             label="author"
             name="author"
             placeholder="author"
@@ -56,6 +58,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
+            type="text"
             label="gender"
             name="gender"
             placeholder="gender"
@@ -66,21 +69,23 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
-            label="gender"
-            name="gender"
-            placeholder="gender"
-            error={book.gender.error}
-            val={book.gender.value}
-            handleType={handleType}
-          />
-        </DirectionColumn>
-        <DirectionColumn>
-          <Input
+            type="number"
             label="quantity"
             name="quantity"
             placeholder="quantity"
             error={book.quantity.error}
             val={book.quantity.value}
+            handleType={handleType}
+          />
+        </DirectionColumn>
+        <DirectionColumn>
+          <Input
+            type="text"
+            label="img"
+            name="img"
+            placeholder="img"
+            error={book.img.error}
+            val={book.img.value}
             handleType={handleType}
           />
           <ContImg>

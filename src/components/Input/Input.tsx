@@ -8,6 +8,7 @@ const Input: React.FC<InputTypes> = ({
   placeholder,
   label,
   name,
+  type,
 }) => {
   return (
     <>
@@ -20,7 +21,7 @@ const Input: React.FC<InputTypes> = ({
         value={val}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleType(e)}
         name={name}
-        type="number"
+        type={type}
       />
 
       <div>
