@@ -3,6 +3,7 @@ import { addBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/addBooksT
 import { BooksAddedToCartTypes } from "../../types/BooksAddedToCartTypes/BooksAddedToCartTypes";
 import { getBooksAddedToCart } from "../../asyncCallThunkToolkit/BooksAdded/getBooksAddedToCart";
 import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
+import { updateQuantityValueOnBooks } from "../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
 const initialState = {
   booksAddedToCart: [],
   status: "",
@@ -11,14 +12,7 @@ const initialState = {
 const booksAddedToCartSlice = createSlice({
   name: "booksAddedToCart",
   initialState,
-  reducers: {
-    addQuantity(state, action) {
-      console.log(action.payload);
-      state.booksAddedToCart = state.booksAddedToCart.map((val: any) => {
-        return val.id === action.payload ? val.quantity.value + 1 : val;
-      });
-    },
-  },
+  reducers: {},
   extraReducers: {
     [addBooksToCart.pending.toString()]: (state, action) => {
       state.status = "loading";
@@ -52,8 +46,19 @@ const booksAddedToCartSlice = createSlice({
     [deleteBooksToCart.rejected.toString()]: (state, action) => {
       state.status = "failed";
     },
+    [updateQuantityValueOnBooks.pending.toString()]: (state, action) => {
+      state.status = "loading";
+    },
+    [updateQuantityValueOnBooks.fulfilled.toString()]: (state, action) => {
+      state.booksAddedToCart = state.booksAddedToCart.map((val) => {
+        return val.id === action.payload.id ? (val = action.payload) : val;
+      });
+      state.status = "success";
+    },
+    [updateQuantityValueOnBooks.rejected.toString()]: (state, action) => {
+      state.status = "failed";
+    },
   },
 });
 
-export const { addQuantity } = booksAddedToCartSlice.actions;
 export default booksAddedToCartSlice.reducer;

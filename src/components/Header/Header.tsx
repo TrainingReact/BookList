@@ -4,7 +4,10 @@ import {
   ContainerIconCart,
   WrapperWidgetCounter,
   WrapperDropDown,
+  ContainerButton,
   DropDownContentWrapper,
+  Button,
+  ContainerImg,
 } from "./HeaderStyle";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
@@ -50,33 +53,37 @@ const Header = () => {
         <WrapperWidgetCounter>{length}</WrapperWidgetCounter>
         <ShoppingCartIcon fontSize="large" />
       </ContainerIconCart>
-      {showDropDown && (
+      {showDropDown && length > 0 ? (
         <WrapperDropDown onMouseLeave={handleOutCart}>
           {books.map((val: Obj, index: number) => {
-            return (
-              <DropDownContentWrapper key={index}>
-                <ImgMapList
-                  className="imgCart"
-                  alt="dio cane"
-                  onError={(
-                    e: React.SyntheticEvent<HTMLImageElement, Event>
-                  ) => {
-                    e.currentTarget.src =
-                      "https://pngimg.com/uploads/book/book_PNG51090.png";
-                  }}
-                  src={String(val.img.value)}
-                />
-                <div> {val.name.value} </div>
-              </DropDownContentWrapper>
-            );
+            if (index < 3) {
+              return (
+                <DropDownContentWrapper key={index}>
+                  <ContainerImg>
+                    <ImgMapList
+                      className="imgCart"
+                      alt="dio cane"
+                      onError={(
+                        e: React.SyntheticEvent<HTMLImageElement, Event>
+                      ) => {
+                        e.currentTarget.src =
+                          "https://pngimg.com/uploads/book/book_PNG51090.png";
+                      }}
+                      src={String(val.img.value)}
+                    />
+                  </ContainerImg>
+                  <div> {val.name.value} </div>
+                </DropDownContentWrapper>
+              );
+            }
           })}
           {location.pathname !== "/shoppingCart" ? (
-            <div onClick={() => history.push("/shoppingCart")}>
-              <button>view more...</button>
-            </div>
+            <ContainerButton onClick={() => history.push("/shoppingCart")}>
+              <Button>view more...</Button>
+            </ContainerButton>
           ) : null}
         </WrapperDropDown>
-      )}
+      ) : null}
     </WrapperHeader>
   );
 };

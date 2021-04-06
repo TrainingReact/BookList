@@ -36,20 +36,55 @@ export const WrapperWidgetCounter = styled.div`
 `;
 
 export const WrapperDropDown = styled.div`
-  background: #e1e1e1;
+  background-color: #e4e4e4;
   min-width: 100px;
   max-width: 100px;
+  min-height: 140px;
+  border: 4px solid black;
   border-radius: 10px;
   position: absolute;
   right: 10px;
   top: 60px;
   z-index: 5;
   padding: 5px;
-  border: 1px solid red;
   height: 70px;
 `;
 
 export const DropDownContentWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid black;
+  padding: 1px;
+  margin-top: 5px;
+  background-color: #d6cdef;
+  border-radius: 10px;
+`;
+
+export const ContainerButton = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Button = styled.button`
+  font-weight: bolder;
+  background-color: #776eb1;
+  border-radius: 40px;
+  color: white;
+  border: 2px solid black;
+  padding: 5px;
+  outline-style: none;
+  transition: 0.3s;
+
+  &:hover {
+    border: 3px solid black;
+  }
+`;
+
+export const ContainerImg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

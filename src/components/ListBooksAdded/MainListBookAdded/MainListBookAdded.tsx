@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
 import LabelListBookField from "./LabelListBookField/LabelListBookField";
@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { useDispatch } from "react-redux";
 import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
+import { updateQuantityValueOnBooks } from "../../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
@@ -43,9 +44,24 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
       return val.id === id;
     });
 
+    const newObj: any = {
+      id: bookToAddOnTheCart?.id,
+      name: { value: bookToAddOnTheCart?.name.value },
+      author: { value: bookToAddOnTheCart?.author.value },
+      gender: { value: bookToAddOnTheCart?.gender.value },
+      img: { value: bookToAddOnTheCart?.img.value },
+      quantity: { value: 1 },
+    };
+
     if (result === undefined) {
-      dispatch(addBooksToCart(bookToAddOnTheCart));
+      dispatch(addBooksToCart(newObj));
     } else {
+      const newOne = {
+        id: newObj.id,
+        value: newObj.quantity.value + 1,
+      };
+      console.log(newOne);
+      dispatch(updateQuantityValueOnBooks(newOne));
     }
   };
 
@@ -97,9 +113,9 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                     <DeleteIcon />
                   </CursorPointerDelete>
                 </ContItemMapFlexIcon>
+
                 <AddCircleRoundedIcon
                   onClick={() => handleAddBookToCart(val.id)}
-                  style={{ cursor: "pointer" }}
                   fontSize="large"
                   color="primary"
                 />
