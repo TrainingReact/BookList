@@ -64,7 +64,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
       };
 
       console.log("after minus dispatch obj", newUpdateQuantity);
-      // dispatch(updateBooks(newUpdateQuantity));
+      // dispatch((newUpdateQuantity));
     }
   };
 
