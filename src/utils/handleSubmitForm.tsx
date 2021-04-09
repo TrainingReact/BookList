@@ -22,12 +22,10 @@ export const handleFormSubmit = (
   setError(book, setBook, val);
 
   const allFill = getKeys(book).every((key) => {
-    const check = key === "quantity";
-
     if (key === "id") {
       return true;
     } else {
-      return check ? book.quantity.value > 0 : book[key].value !== "";
+      return key === "quantity" ? book.quantity > 0 : book[key].value !== "";
     }
   });
 
@@ -35,7 +33,7 @@ export const handleFormSubmit = (
     if (checkerModalModify) {
       dispatch(updateBooks({ book: book, id: idBookToModify }));
       dispatch(toggleModalCheckerModify(false));
-      clearAllField(book, setBook);
+      clearAllField(book, setBook, book?.quantity);
       dispatch(toggleModalChecker(false));
     } else {
       dispatch(addBooks(book));

@@ -18,7 +18,9 @@ import { useSelector } from "react-redux";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { useDispatch } from "react-redux";
 import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
+import { updateBooks } from "../../../asyncCallThunkToolkit/Books/updateBooks";
 import { updateQuantityValueOnBooks } from "../../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
+import { Obj } from "../../MainModalForm/MainModalForm";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
@@ -34,7 +36,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   const dispatch = useDispatch();
 
   const handleAddBookToCart = (id: number) => {
-    let bookToAddOnTheCart: any;
+    let bookToAddOnTheCart: Obj;
 
     bookToAddOnTheCart = booksFromStore.find((val: any) => {
       return val.id === id;
@@ -44,24 +46,25 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
       return val.id === id;
     });
 
-    const newObj: any = {
-      id: bookToAddOnTheCart?.id,
-      name: { value: bookToAddOnTheCart?.name.value },
-      author: { value: bookToAddOnTheCart?.author.value },
-      gender: { value: bookToAddOnTheCart?.gender.value },
-      img: { value: bookToAddOnTheCart?.img.value },
-      quantity: { value: 1 },
-    };
-
     if (result === undefined) {
-      dispatch(addBooksToCart(newObj));
+      const newOne = { ...bookToAddOnTheCart, quantity: 1 };
+      dispatch(addBooksToCart(newOne));
     } else {
-      const newOne = {
-        id: newObj.id,
-        value: newObj.quantity.value + 1,
+      const boostQuantity = { ...result, quantity: result.quantity + 1 };
+      // console.log(bookToAddOnTheCart.quantity);
+      // if (boostQuantity < bookToAddOnTheCart.quantity);
+
+      dispatch(updateQuantityValueOnBooks(boostQuantity));
+
+      console.log("before minus", bookToAddOnTheCart);
+
+      const newUpdateQuantity = {
+        ...bookToAddOnTheCart,
+        quantity: bookToAddOnTheCart.quantity - 1,
       };
-      console.log(newOne);
-      dispatch(updateQuantityValueOnBooks(newOne));
+
+      console.log("after minus dispatch obj", newUpdateQuantity);
+      // dispatch(updateBooks(newUpdateQuantity));
     }
   };
 
@@ -101,7 +104,7 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
 
                 <LabelListBookField val={val.gender.value} label="gender" />
 
-                <LabelListBookField val={val.quantity.value} label="quantity" />
+                <LabelListBookField val={val.quantity} label="quantity" />
 
                 <ContItemMapFlexIcon>
                   <CursorPointer onClick={() => handleModify(val.id)}>

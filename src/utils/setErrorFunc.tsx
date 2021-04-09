@@ -7,7 +7,7 @@ const setError = (
   val: any
 ) => {
   getKeys(book).forEach((key: objKeys) => {
-    if (key !== "id") {
+    if (key !== "id" && key !== "quantity") {
       if (book[key].value === "") {
         setBook((prevState: any) => ({
           ...prevState,

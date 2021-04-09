@@ -11,7 +11,7 @@ export interface Obj {
   author: Field;
   gender: Field;
   img: Field;
-  quantity: { value: number; error: string };
+  quantity: number;
 }
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
@@ -43,19 +43,23 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isQuantity = e.currentTarget.name === "quantity";
-    const quantity =
-      isQuantity && Number(e.currentTarget.value) < 1
-        ? 1
-        : Number(e.currentTarget.value);
 
-    setBook({
-      ...book,
-      id: Math.random(),
-      [e.currentTarget.name]: {
-        value: isQuantity ? quantity : e.currentTarget.value,
-        error: "",
-      },
-    });
+    if (!isQuantity) {
+      setBook({
+        ...book,
+        id: Math.random(),
+        [e.currentTarget.name]: {
+          value: String(e.currentTarget.value),
+          error: "",
+        },
+      });
+    } else {
+      setBook({
+        ...book,
+        [e.currentTarget.name]:
+          +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+      });
+    }
   };
 
   return (

@@ -12,16 +12,13 @@ import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
 import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
+import { Obj } from "../MainModalForm/MainModalForm";
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
   setIdBookToModify,
   book,
   setBook,
 }) => {
   const store = useSelector((state: any) => state.books.books);
-
-  const storeFromBooksCart = useSelector(
-    (state: any) => state.booksAddedToCart
-  );
 
   const dispatch = useDispatch();
   const lastItem = store && store.length;
@@ -36,17 +33,29 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
 
   const handleModify = (id: number) => {
     getKeys(book).map((key: objKeys) => {
-      let valueOfObjToModify: string | number;
+      let valueOfObjToModify: Obj;
+
       store.find((val: any) =>
         val.id === id ? (valueOfObjToModify = val[key].value) : null
       );
-      if (key !== "id") {
+      let quantityFinded: any;
+
+      store.find((val: Obj) => {
+        return val.id === id ? (quantityFinded = val.quantity) : null;
+      });
+
+      if (key !== "id" && key !== "quantity") {
         setBook((prevState) => ({
           ...prevState,
           [key]: {
             value: valueOfObjToModify,
             error: book[key].error,
           },
+        }));
+      } else {
+        setBook((prevState) => ({
+          ...prevState,
+          quantity: quantityFinded,
         }));
       }
     });

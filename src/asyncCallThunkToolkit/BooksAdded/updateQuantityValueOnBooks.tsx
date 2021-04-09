@@ -8,9 +8,7 @@ export const updateQuantityValueOnBooks: AsyncThunk<
 > = createAsyncThunk("books/updateQuantityValueOnBooks", async (book: any) => {
   return axios
     .patch(`http://localhost:3000/booksAddedToCart/${book?.id}`, {
-      quantity: {
-        value: book?.value,
-      },
+      quantity: book.quantity,
     })
     .then((re: any) => {
       return re.data;

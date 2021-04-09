@@ -1,5 +1,5 @@
 type FieldTypes = {
-  value: string | number;
+  value: string;
   error: string;
 };
 

@@ -73,8 +73,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
             label="quantity"
             name="quantity"
             placeholder="quantity"
-            error={book.quantity.error}
-            val={book.quantity.value}
+            val={Number(book.quantity)}
             handleType={handleType}
           />
         </DirectionColumn>

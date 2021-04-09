@@ -38,7 +38,7 @@ function ShoppingCart() {
           return (
             <ContainerItemCart key={index}>
               <div> {val?.name?.value} </div>
-              <div> {val?.quantity?.value} </div>
+              <div> {val?.quantity} </div>
               <div>
                 <button
                   onClick={() => handleDeleteItemFromShoppingCart(val.id)}
