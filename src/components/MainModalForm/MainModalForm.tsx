@@ -12,6 +12,7 @@ export interface Obj {
   gender: Field;
   img: Field;
   quantity: number;
+  disponibility: number;
 }
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({

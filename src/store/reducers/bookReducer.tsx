@@ -4,6 +4,8 @@ import { addBooks } from "../../asyncCallThunkToolkit/Books/addBooks";
 import { updateBooks } from "../../asyncCallThunkToolkit/Books/updateBooks";
 import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
+import { updateQuantityValueOnBooks } from "../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
+import { updateQuantityBooks } from "../../asyncCallThunkToolkit/Books/updateQuantityBooks";
 
 export const initialState = {
   books: [],
@@ -68,6 +70,18 @@ const bookSlice = createSlice({
     [deleteBooks.rejected.toString()]: (state, action) => {
       state.status = "failed";
     },
+    // [updateQuantityBooks.pending.toString()]: (state, action) => {
+    //   state.status = "loading";
+    // },
+    // [updateQuantityBooks.fulfilled.toString()]: (state, action) => {
+    //   state.books = state.books.map((val) => {
+    //     return val.id === action.payload.id ? (val = action.payload) : val;
+    //   });
+    //   state.status = "success";
+    // },
+    // [updateQuantityBooks.rejected.toString()]: (state, action) => {
+    //   state.status = "failed";
+    // },
   },
 });
 

@@ -5,7 +5,7 @@ export const getBooksAddedToCart = createAsyncThunk(
   "books/getBooksAddedToCart",
   async () => {
     return axios
-      .get("http://localhost:3000/booksAddedToCart")
+      .get("http://localhost:4000/booksAddedToCart")
       .then((res: any) => {
         return res.data;
       });

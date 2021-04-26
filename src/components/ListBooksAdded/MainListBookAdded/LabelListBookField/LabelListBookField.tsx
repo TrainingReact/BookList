@@ -7,8 +7,14 @@ const LabelListBookField: React.FC<LabelListBookFieldTypes> = ({
 }) => {
   return (
     <ItemMap>
-      <SpanListLabel>{label} :</SpanListLabel>
-      <ValueList>{val}</ValueList>
+      {val !== 0 ? (
+        <>
+          <SpanListLabel>{label} :</SpanListLabel>
+          <ValueList color={"black"}>{val}</ValueList>
+        </>
+      ) : (
+        <ValueList color={"red"}>nessuna disponibilità</ValueList>
+      )}
     </ItemMap>
   );
 };

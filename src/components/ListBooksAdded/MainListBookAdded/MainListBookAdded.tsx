@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
 import LabelListBookField from "./LabelListBookField/LabelListBookField";
@@ -18,9 +18,9 @@ import { useSelector } from "react-redux";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { useDispatch } from "react-redux";
 import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
-import { updateBooks } from "../../../asyncCallThunkToolkit/Books/updateBooks";
 import { updateQuantityValueOnBooks } from "../../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
 import { Obj } from "../../MainModalForm/MainModalForm";
+import { updateQuantityBooks } from "../../../asyncCallThunkToolkit/Books/updateQuantityBooks";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
@@ -48,23 +48,29 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
 
     if (result === undefined) {
       const newOne = { ...bookToAddOnTheCart, quantity: 1 };
+
+      const newUpdateQuantityBeforeFirstBook = {
+        ...bookToAddOnTheCart,
+        quantity: bookToAddOnTheCart.quantity - 1,
+      };
+
+      dispatch(updateQuantityBooks(newUpdateQuantityBeforeFirstBook));
+
       dispatch(addBooksToCart(newOne));
     } else {
       const boostQuantity = { ...result, quantity: result.quantity + 1 };
-      // console.log(bookToAddOnTheCart.quantity);
-      // if (boostQuantity < bookToAddOnTheCart.quantity);
-
-      dispatch(updateQuantityValueOnBooks(boostQuantity));
-
-      console.log("before minus", bookToAddOnTheCart);
 
       const newUpdateQuantity = {
         ...bookToAddOnTheCart,
         quantity: bookToAddOnTheCart.quantity - 1,
       };
 
-      console.log("after minus dispatch obj", newUpdateQuantity);
-      // dispatch((newUpdateQuantity));
+      if (newUpdateQuantity.quantity > -1)
+        dispatch(updateQuantityValueOnBooks(boostQuantity));
+
+      if (newUpdateQuantity.quantity > -1) {
+        dispatch(updateQuantityBooks(newUpdateQuantity));
+      }
     }
   };
 

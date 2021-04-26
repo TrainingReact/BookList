@@ -25,7 +25,9 @@ export const handleFormSubmit = (
     if (key === "id") {
       return true;
     } else {
-      return key === "quantity" ? book.quantity > 0 : book[key].value !== "";
+      return key === "quantity" || key === "disponibility"
+        ? book.quantity > 0 && book.disponibility > 0
+        : book[key].value !== "";
     }
   });
 

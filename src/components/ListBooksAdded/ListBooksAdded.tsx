@@ -11,8 +11,9 @@ import { objKeys } from "../../types/objKeysTypes/objKeysType";
 import { ContMainListBookAdded } from "./ListBooksAddedStyle";
 import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
 import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
-import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
 import { Obj } from "../MainModalForm/MainModalForm";
+import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
+
 const ListBooksAdded: React.FC<ListBookAddedType> = ({
   setIdBookToModify,
   book,
@@ -20,15 +21,24 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
 }) => {
   const store = useSelector((state: any) => state.books.books);
 
+  const storeFromCart = useSelector(
+    (state: any) => state.booksAddedToCart.booksAddedToCart
+  );
+
   const dispatch = useDispatch();
+
   const lastItem = store && store.length;
 
   const handleDelete = (id: number) => {
     dispatch(deleteBooks(id));
-    dispatch(deleteBooksToCart(id));
 
-    if (store.length === 1)
-      alert("you have read all the books! great keep it up!");
+    const check = storeFromCart.find((val: any) => {
+      return val.id === id;
+    });
+
+    if (check) dispatch(deleteBooksToCart(id));
+
+    if (store.length === 1) alert("you have read all the books");
   };
 
   const handleModify = (id: number) => {
@@ -44,7 +54,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
         return val.id === id ? (quantityFinded = val.quantity) : null;
       });
 
-      if (key !== "id" && key !== "quantity") {
+      if (key !== "id" && key !== "quantity" && key !== "disponibility") {
         setBook((prevState) => ({
           ...prevState,
           [key]: {

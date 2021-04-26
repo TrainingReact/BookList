@@ -23,6 +23,7 @@ const Index = () => {
     gender: { value: "", error: "" },
     img: { value: "", error: "" },
     quantity: 1,
+    disponibility: 1,
   });
 
   const handleClose = () => {
