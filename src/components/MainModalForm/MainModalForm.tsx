@@ -43,9 +43,14 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isQuantity = e.currentTarget.name === "quantity";
-
-    if (!isQuantity) {
+    if (e.currentTarget.name === "quantity") {
+      setBook({
+        ...book,
+        [e.currentTarget.name]:
+          +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+        disponibility: +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+      });
+    } else {
       setBook({
         ...book,
         id: Math.random(),
@@ -53,12 +58,6 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
           value: String(e.currentTarget.value),
           error: "",
         },
-      });
-    } else {
-      setBook({
-        ...book,
-        [e.currentTarget.name]:
-          +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
       });
     }
   };

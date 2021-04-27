@@ -6,5 +6,4 @@ export interface Book {
   gender: Field;
   img: Field;
   quantity: number;
-  disponibility: number;
 }

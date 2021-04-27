@@ -70,18 +70,6 @@ const bookSlice = createSlice({
     [deleteBooks.rejected.toString()]: (state, action) => {
       state.status = "failed";
     },
-    // [updateQuantityBooks.pending.toString()]: (state, action) => {
-    //   state.status = "loading";
-    // },
-    // [updateQuantityBooks.fulfilled.toString()]: (state, action) => {
-    //   state.books = state.books.map((val) => {
-    //     return val.id === action.payload.id ? (val = action.payload) : val;
-    //   });
-    //   state.status = "success";
-    // },
-    // [updateQuantityBooks.rejected.toString()]: (state, action) => {
-    //   state.status = "failed";
-    // },
   },
 });
 

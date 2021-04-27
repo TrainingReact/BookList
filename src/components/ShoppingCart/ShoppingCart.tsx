@@ -9,6 +9,13 @@ import {
   ContainerTitle,
   WrapperPrice,
   ContainerItemCart,
+  ContainerButtonRemoveAll,
+  ContainerIcon,
+  Button,
+  ImageList,
+  WrapperList,
+  WrapperItem,
+  SepareteLine,
 } from "./ShoppingCartStyle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
@@ -81,19 +88,19 @@ function ShoppingCart() {
     if (bookFromCart.length === 1) hisotry.push("/");
   };
 
+  // this func find the book with same id of the book u want to add quantity
+  // create a new objecet spredding the
   const handleAddQuantity = (val: Obj) => {
     const findBook: Obj = books.find((bookFromStore: Obj) => {
       return bookFromStore.id === val.id;
     });
 
-    const valAddToCartHandleQuantity = {
-      ...val,
-      quantity: val.quantity + 1,
-    };
+    if (val.quantity < findBook.disponibility) {
+      const valAddToCartHandleQuantity = {
+        ...val,
+        quantity: val.quantity + 1,
+      };
 
-    console.log(findBook.quantity);
-
-    if (findBook.quantity !== 0) {
       dispatch(updateQuantityValueOnBooks(valAddToCartHandleQuantity));
     }
 
@@ -102,7 +109,7 @@ function ShoppingCart() {
         ...findBook,
         quantity: findBook.quantity - 1,
       };
-      updateQuantityBooks(bookWithQuantity);
+      dispatch(updateQuantityBooks(bookWithQuantity));
     }
   };
 
@@ -111,24 +118,42 @@ function ShoppingCart() {
       dispatch(updateQuantityBooks(element));
       dispatch(deleteBooksToCart(element.id));
     });
+
+    if (bookFromCart.length === 1) hisotry.push("/");
   };
 
   return (
+    // <WrapperShoppingCartComponent>
+    //   <h1>Carello</h1>
+    //   <SepareteLine />
+    //   {bookFromCart &&
+    //     bookFromCart.map((book: Obj) => {
+    //       return (
+    //         <WrapperList>
+    //           <WrapperItem>
+    //             <ImgMapList
+    //               onError={(
+    //                 e: React.SyntheticEvent<HTMLImageElement, Event>
+    //               ) => {
+    //                 e.currentTarget.src =
+    //                   "https://pngimg.com/uploads/book/book_PNG51090.png";
+    //               }}
+    //               src={String(book.img.value)}
+    //             ></ImgMapList>
+    //           </WrapperItem>
+    //         </WrapperList>
+    //       );
+    //     })}
+    // </WrapperShoppingCartComponent>
     <WrapperShoppingCartComponent>
       <ContainerTitle>
         <h1>SHOPPING CART</h1>
       </ContainerTitle>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: "10px",
-        }}
-      >
-        <button onClick={handleRemoveAllBooks} style={{ color: "red" }}>
+      <ContainerButtonRemoveAll>
+        <Button onClick={handleRemoveAllBooks}>
           remove all books in the cart
-        </button>
-      </div>
+        </Button>
+      </ContainerButtonRemoveAll>
 
       {bookFromCart &&
         bookFromCart.map((val: any, index: number) => {
@@ -136,14 +161,7 @@ function ShoppingCart() {
             <ContainerItemCart key={index}>
               <div> {val?.name?.value} </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  width: "100px",
-                }}
-              >
+              <ContainerIcon>
                 <div onClick={() => handleAddQuantity(val)}>
                   <AddCircleIcon />
                 </div>
@@ -151,10 +169,10 @@ function ShoppingCart() {
                 <div onClick={() => handleDeleteItemFromShoppingCart(val)}>
                   <RemoveCircleIcon />
                 </div>
-              </div>
-              <button onClick={() => handleDeleteBook(val)}>
+              </ContainerIcon>
+              <Button onClick={() => handleDeleteBook(val)}>
                 remove from cart
-              </button>
+              </Button>
             </ContainerItemCart>
           );
         })}

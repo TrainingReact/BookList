@@ -21,13 +21,12 @@ export const handleFormSubmit = (
 ) => {
   setError(book, setBook, val);
 
+  //this function return array of boolean to check if all field are fill
   const allFill = getKeys(book).every((key) => {
-    if (key === "id") {
+    if (key === "id" || key === "quantity" || key === "disponibility") {
       return true;
     } else {
-      return key === "quantity" || key === "disponibility"
-        ? book.quantity > 0 && book.disponibility > 0
-        : book[key].value !== "";
+      return book[key].value !== "";
     }
   });
 
