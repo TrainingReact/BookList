@@ -6,7 +6,7 @@ const Wrapper = styled.div`
 `;
 
 interface ContainerIconPropsTypes {
-  checkStoreLength: Boolean;
+  checkStoreLength?: Boolean;
   color?: string;
 }
 
@@ -30,8 +30,7 @@ export const ContainerIcon = styled.svg<ContainerIconPropsTypes>`
   &.allFill {
     cursor: pointer;
     transition: 0.5;
-    position: absolute;
-    top: 4.8%;
+    top: 14%;
     right: 1%;
     transform: translateY(-50%);
     height: 10%;

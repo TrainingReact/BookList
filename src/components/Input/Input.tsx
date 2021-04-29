@@ -8,6 +8,7 @@ const Input: React.FC<InputTypes> = ({
   placeholder,
   label,
   name,
+  type,
 }) => {
   return (
     <>
@@ -17,14 +18,14 @@ const Input: React.FC<InputTypes> = ({
       <InputModal
         required
         placeholder={placeholder}
-        value={val}
+        value={name === "quantity" ? Number(val) : String(val)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleType(e)}
         name={name}
-        type="text"
+        type={type}
       />
 
       <div>
-        <TextError>{error}</TextError>
+        <TextError> {name === "quantity" ? null : error}</TextError>
       </div>
     </>
   );

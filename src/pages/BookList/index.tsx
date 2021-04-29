@@ -4,21 +4,15 @@ import ListBooksAdded from "../../components/ListBooksAdded/ListBooksAdded";
 import { Obj } from "../../components/MainModalForm/MainModalForm";
 import clearAllField from "../../utils/clearAllField";
 import setError from "../../utils/setErrorFunc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  getBooks,
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
+import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
 
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
-
-  const books = useSelector((state: any) => state.books.books);
-
-  // const status = useSelector((state: any) => state.books.status);
-
-  console.log("books in index", books);
 
   const dispatch = useDispatch();
 
@@ -28,6 +22,8 @@ const Index = () => {
     author: { value: "", error: "" },
     gender: { value: "", error: "" },
     img: { value: "", error: "" },
+    quantity: 1,
+    disponibility: 1,
   });
 
   const handleClose = () => {

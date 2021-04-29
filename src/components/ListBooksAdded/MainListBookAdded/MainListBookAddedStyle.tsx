@@ -82,6 +82,10 @@ export const WrapperItem = styled.div<WrapperItemPropsTypes>`
 export const ImgMapList = styled.img<ImgMapListTypeProps>`
   max-width: 50px;
   max-height: 50px;
+  &.imgCart {
+    max-width: 20px;
+    min-width: 20px;
+  }
 `;
 
 export const ContImg = styled.div`

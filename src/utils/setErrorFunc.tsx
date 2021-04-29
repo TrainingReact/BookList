@@ -4,10 +4,10 @@ import { Obj } from "../components/MainModalForm/MainModalForm";
 const setError = (
   book: Obj,
   setBook: React.Dispatch<React.SetStateAction<Obj>>,
-  val: any
+  val: string
 ) => {
   getKeys(book).forEach((key: objKeys) => {
-    if (key !== "id") {
+    if (key !== "id" && key !== "quantity" && key !== "disponibility") {
       if (book[key].value === "") {
         setBook((prevState: any) => ({
           ...prevState,

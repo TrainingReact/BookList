@@ -1,67 +1,16 @@
-import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
-import Field from "../../types/FieldTypes/FieldTypes";
-import axios, { AxiosResponse } from "axios";
-import { Obj } from "../../components/MainModalForm/MainModalForm";
-interface Book {
-  id: number;
-  name: Field;
-  author: Field;
-  gender: Field;
-  img: Field;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
+import { addBooks } from "../../asyncCallThunkToolkit/Books/addBooks";
+import { updateBooks } from "../../asyncCallThunkToolkit/Books/updateBooks";
+import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
+import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
 
-export interface BookState {
-  books: Book[];
-  modalChecker: boolean;
-  modalCheckerModify: boolean;
-  status: string;
-}
-
-const initialState = {
+export const initialState = {
   books: [],
   modalChecker: false,
   modalCheckerModify: false,
   status: "",
 } as BookState;
-
-export const getBooks: AsyncThunk<
-  AxiosResponse<any>,
-  void,
-  {}
-> = createAsyncThunk("books/getBooks", async () => {
-  return axios.get("http://localhost:3000/books").then((res) => {
-    return res.data;
-  });
-});
-
-export const addBooks: AsyncThunk<any, Obj, {}> = createAsyncThunk(
-  "books/addBooks",
-  async (book: Obj) => {
-    return axios.post("http://localhost:3000/books", book).then((re: any) => {
-      return re.data;
-    });
-  }
-);
-
-export const updateBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
-  "books/updateBooks",
-  async (book: any) => {
-    return axios
-      .patch(`http://localhost:3000/books/${book?.id}`, book?.book)
-      .then((re: any) => {
-        return re.data;
-      });
-  }
-);
-
-export const deleteBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
-  "books/deleteBooks",
-  async (id: any) => {
-    return axios.delete(`http://localhost:3000/books/${id}`).then((re: any) => {
-      return id;
-    });
-  }
-);
 
 const bookSlice = createSlice({
   name: "books",
@@ -111,7 +60,6 @@ const bookSlice = createSlice({
       state.status = "loading";
     },
     [deleteBooks.fulfilled.toString()]: (state, action) => {
-      console.log("action.payload.id", action.payload);
       state.books = state.books.filter((book) => {
         return book.id !== action.payload;
       });

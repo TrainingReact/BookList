@@ -15,17 +15,69 @@ import {
   AddBookSpan,
 } from "./MainListBookAddedStyle";
 import { useSelector } from "react-redux";
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import { useDispatch } from "react-redux";
+import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBooksToCart";
+import { updateQuantityValueOnBooks } from "../../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
+import { Obj } from "../../MainModalForm/MainModalForm";
+import { updateQuantityBooks } from "../../../asyncCallThunkToolkit/Books/updateQuantityBooks";
+
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
   handleModify,
   handleDelete,
 }) => {
-  const books = useSelector((state: any) => state.books.books);
+  const booksFromStore = useSelector((state: any) => state.books.books);
+
+  const booksAdded = useSelector(
+    (state: any) => state.booksAddedToCart.booksAddedToCart
+  );
+
+  const dispatch = useDispatch();
+
+  const handleAddBookToCart = (id: number) => {
+    let bookToAddOnTheCart: Obj;
+
+    bookToAddOnTheCart = booksFromStore.find((val: any) => {
+      return val.id === id;
+    });
+
+    const result = booksAdded.find((val: any) => {
+      return val.id === id;
+    });
+
+    if (result === undefined) {
+      const newOne = { ...bookToAddOnTheCart, quantity: 1 };
+
+      const newUpdateQuantityBeforeFirstBook = {
+        ...bookToAddOnTheCart,
+        quantity: bookToAddOnTheCart.quantity - 1,
+      };
+
+      dispatch(updateQuantityBooks(newUpdateQuantityBeforeFirstBook));
+
+      dispatch(addBooksToCart(newOne));
+    } else {
+      const boostQuantity = { ...result, quantity: result.quantity + 1 };
+
+      const newUpdateQuantity = {
+        ...bookToAddOnTheCart,
+        quantity: bookToAddOnTheCart.quantity - 1,
+      };
+
+      if (newUpdateQuantity.quantity > -1)
+        dispatch(updateQuantityValueOnBooks(boostQuantity));
+
+      if (newUpdateQuantity.quantity > -1) {
+        dispatch(updateQuantityBooks(newUpdateQuantity));
+      }
+    }
+  };
 
   return (
     <>
-      {books && books.length > 0 ? (
-        books.map((val: any, index: number) => {
+      {booksFromStore && booksFromStore.length > 0 ? (
+        booksFromStore.map((val: any, index: number) => {
           return (
             <div key={index}>
               <Header
@@ -33,7 +85,9 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                   index > 0 ? "borderTopRightRadius" : "borderTopLeftRadius"
                 }
               >
-                <NameHeaderText>{val?.name?.value}</NameHeaderText>
+                <NameHeaderText>
+                  {val?.name?.value ? val?.name?.value : val.name}
+                </NameHeaderText>
               </Header>
               <WrapperItem
                 className={
@@ -50,13 +104,26 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                       e.currentTarget.src =
                         "https://pngimg.com/uploads/book/book_PNG51090.png";
                     }}
-                    src={String(val?.img?.value)}
+                    src={String(val?.img?.value ? val?.img?.value : val.img)}
                   />
                 </ContImg>
 
-                <LabelListBookField val={val} label="author" />
+                <LabelListBookField
+                  val={val?.author?.value ? val?.author?.value : val.author}
+                  label="author"
+                />
 
-                <LabelListBookField val={val} label="gender" />
+                <LabelListBookField
+                  val={val?.gender?.value ? val?.gender?.value : val.gender}
+                  label="gender"
+                />
+
+                <LabelListBookField
+                  val={
+                    val?.quantity?.value ? val?.quantity?.value : val.quantity
+                  }
+                  label="quantity"
+                />
 
                 <ContItemMapFlexIcon>
                   <CursorPointer onClick={() => handleModify(val.id)}>
@@ -68,6 +135,12 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                     <DeleteIcon />
                   </CursorPointerDelete>
                 </ContItemMapFlexIcon>
+
+                <AddCircleRoundedIcon
+                  onClick={() => handleAddBookToCart(val.id)}
+                  fontSize="large"
+                  color="primary"
+                />
               </WrapperItem>
             </div>
           );

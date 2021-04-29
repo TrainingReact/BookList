@@ -1,8 +1,8 @@
 import React from "react";
 import ModalJsxTypes from "../../types/ModalJsxTypes/ModalJsxTypes";
-import { useSelector } from "react-redux";
+import { DefaultRootState, useSelector } from "react-redux";
 import Input from "../Input/Input";
-import LabelSwitch from "../LabelSwitch/LabelSwitch";
+import LabelSwitch from "./LabelSwitch/LabelSwitch";
 import ButtonSubmit from "../ButtonModify/ButtonModify";
 import {
   DirectionColumn,
@@ -11,15 +11,20 @@ import {
   Close,
   WrapperForm,
 } from "./ModalJsxStyle";
+import { Obj } from "../MainModalForm/MainModalForm";
+import { RootState } from "../../store/store";
+import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
+import store from "../../store/store";
+
 const ModalJsx: React.FC<ModalJsxTypes> = ({
-  book,
   handleAddBook,
   handleType,
   handleClose,
   setToggle,
   toggle,
+  book,
 }) => {
-  const checkModalModify: any = useSelector(
+  const checkModalModify = useSelector(
     (state: any) => state.books.modalCheckerModify
   );
 
@@ -36,6 +41,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
       <WrapperForm>
         <DirectionColumn>
           <Input
+            type="text"
             label="name"
             name="name"
             placeholder="name"
@@ -46,6 +52,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
+            type="text"
             label="author"
             name="author"
             placeholder="author"
@@ -56,6 +63,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
+            type="text"
             label="gender"
             name="gender"
             placeholder="gender"
@@ -66,6 +74,17 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
         </DirectionColumn>
         <DirectionColumn>
           <Input
+            type="number"
+            label="quantity"
+            name="quantity"
+            placeholder="quantity"
+            val={Number(book.quantity)}
+            handleType={handleType}
+          />
+        </DirectionColumn>
+        <DirectionColumn>
+          <Input
+            type="text"
             label="img"
             name="img"
             placeholder="img"
@@ -80,7 +99,7 @@ const ModalJsx: React.FC<ModalJsxTypes> = ({
                 e.currentTarget.src =
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPBoJ-u5is_IuOgE2wj18XdIB94tsYhy6V-Q&usqp=CAU";
               }}
-              src={book.img.value}
+              src={String(book?.img?.value)}
             />
           </ContImg>
         </DirectionColumn>

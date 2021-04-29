@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addBooks,
-  updateBooks,
-  toggleModalChecker,
-  toggleModalCheckerModify,
-} from "../../store/reducers/bookReducer";
 import ModalJsx from "../ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
-import getKeys from "../../utils/getKeysFunc";
-import setError from "../../utils/setErrorFunc";
-import clearAllField from "../../utils/clearAllField";
 import Field from "../../types/FieldTypes/FieldTypes";
+import { handleFormSubmit } from "../../utils/handleSubmitForm";
 
 export interface Obj {
   id: number;
@@ -19,6 +11,8 @@ export interface Obj {
   author: Field;
   gender: Field;
   img: Field;
+  quantity: number;
+  disponibility: number;
 }
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
@@ -34,46 +28,40 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
     (state: any) => state.books.modalCheckerModify
   );
 
+  const store = useSelector((state: any) => state.books.books);
+
   let val = "required field";
 
   const handleAddBook = () => {
-    setError(book, setBook, val);
-
-    const allFill = getKeys(book).every((key) => {
-      if (key === "id") {
-        return true;
-      } else {
-        return book[key].value !== "";
-      }
-    });
-
-    if (allFill) {
-      if (checkerModalModify) {
-        dispatch(updateBooks({ book: book, id: idBookToModify }));
-        dispatch(toggleModalCheckerModify(false));
-        clearAllField(book, setBook);
-        dispatch(toggleModalChecker(false));
-      } else {
-        dispatch(addBooks(book));
-        clearAllField(book, setBook);
-        if (!toggle) {
-          dispatch(toggleModalChecker(false));
-        }
-      }
-    } else {
-      alert("fill in all fields M8");
-    }
+    handleFormSubmit(
+      book,
+      val,
+      setBook,
+      dispatch,
+      checkerModalModify,
+      idBookToModify,
+      toggle
+    );
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBook({
-      ...book,
-      id: Math.random(),
-      [e.currentTarget.name]: {
-        value: e.currentTarget.value,
-        error: "",
-      },
-    });
+    if (e.currentTarget.name === "quantity") {
+      setBook({
+        ...book,
+        [e.currentTarget.name]:
+          +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+        disponibility: +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+      });
+    } else {
+      setBook({
+        ...book,
+        id: !checkerModalModify ? store.length + 1 : book.id,
+        [e.currentTarget.name]: {
+          value: String(e.currentTarget.value),
+          error: "",
+        },
+      });
+    }
   };
 
   return (
