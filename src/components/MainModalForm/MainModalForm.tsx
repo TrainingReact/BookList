@@ -4,12 +4,15 @@ import ModalJsx from "../ModalJsx/ModalJsx";
 import MainModalFormPropsTypes from "../../types/MainModalFormPropsTypes/MainModalFormPropsTypes";
 import Field from "../../types/FieldTypes/FieldTypes";
 import { handleFormSubmit } from "../../utils/handleSubmitForm";
+
 export interface Obj {
   id: number;
   name: Field;
   author: Field;
   gender: Field;
   img: Field;
+  quantity: number;
+  disponibility: number;
 }
 
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
@@ -24,6 +27,8 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   const checkerModalModify = useSelector(
     (state: any) => state.books.modalCheckerModify
   );
+
+  const store = useSelector((state: any) => state.books.books);
 
   let val = "required field";
 
@@ -40,14 +45,23 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBook({
-      ...book,
-      id: Math.random(),
-      [e.currentTarget.name]: {
-        value: e.currentTarget.value,
-        error: "",
-      },
-    });
+    if (e.currentTarget.name === "quantity") {
+      setBook({
+        ...book,
+        [e.currentTarget.name]:
+          +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+        disponibility: +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
+      });
+    } else {
+      setBook({
+        ...book,
+        id: !checkerModalModify ? store.length + 1 : book.id,
+        [e.currentTarget.name]: {
+          value: String(e.currentTarget.value),
+          error: "",
+        },
+      });
+    }
   };
 
   return (

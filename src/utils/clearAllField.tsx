@@ -4,17 +4,23 @@ import { Obj } from "../components/MainModalForm/MainModalForm";
 
 const clearAllField = (
   book: Obj,
-  setBook: React.Dispatch<React.SetStateAction<Obj>>
+  setBook: React.Dispatch<React.SetStateAction<Obj>>,
+  quantity?: number
 ) => {
   getKeys(book).map((val: objKeys) => {
     if (val !== "id") {
-      setBook((prevState: any) => ({
-        ...prevState,
-        [val]: {
-          value: "",
-          error: book[val].error,
-        },
-      }));
+      const isQuantity = val === "quantity" || val === "disponibility";
+      if (!isQuantity) {
+        setBook((prevState: Obj) => ({
+          ...prevState,
+          [val]: {
+            value: "",
+            error: "",
+          },
+        }));
+      } else {
+        return setBook((prev: Obj) => ({ ...prev, [val]: 1 }));
+      }
     }
   });
 };

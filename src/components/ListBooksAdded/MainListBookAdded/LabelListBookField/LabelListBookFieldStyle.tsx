@@ -30,4 +30,5 @@ export const ValueList = styled.span`
   font-family: cursive;
   font-weight: bold;
   white-space: wrap;
+  color: ${(props) => props.color};
 `;

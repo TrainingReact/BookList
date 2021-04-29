@@ -1,4 +1,4 @@
-import LabelSwitchTypes from "../../types/LabelSwitchTypes/LabelSwitchTypes";
+import LabelSwitchTypes from "../../../types/LabelSwitchTypes/LabelSwitchTypes";
 import { Wrapper, Switch } from "./LabelSwitchStyle";
 const LabelSwitch: React.FC<LabelSwitchTypes> = ({ toggle, setToggle }) => {
   return (

@@ -1,8 +1,7 @@
 import React from "react";
-import Index from "../src/pages/BookList/index";
-
+import RouterView from "./router/Router";
 function App() {
-  return <Index />;
+  return <RouterView />;
 }
 
 export default App;

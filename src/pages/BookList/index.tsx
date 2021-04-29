@@ -9,7 +9,7 @@ import {
   toggleModalChecker,
   toggleModalCheckerModify,
 } from "../../store/reducers/bookReducer";
-import { getBooks } from "../../asyncCallThunkToolkit/getBooks";
+import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
 
 const Index = () => {
   const [idBookToModify, setIdBookToModify] = useState<number>(0);
@@ -22,6 +22,8 @@ const Index = () => {
     author: { value: "", error: "" },
     gender: { value: "", error: "" },
     img: { value: "", error: "" },
+    quantity: 1,
+    disponibility: 1,
   });
 
   const handleClose = () => {
