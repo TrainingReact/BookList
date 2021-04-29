@@ -32,12 +32,32 @@ export const handleFormSubmit = (
 
   if (allFill) {
     if (checkerModalModify) {
-      dispatch(updateBooks({ book: book, id: idBookToModify }));
+      const bookToModifyWithoutErrorKey = {
+        ...book,
+        id: book.id,
+        name: book.name.value,
+        author: book.name.value,
+        gender: book.name.value,
+        img: book.name.value,
+        quantity: book.quantity,
+        disponibility: book.disponibility,
+      };
+      dispatch(updateBooks(bookToModifyWithoutErrorKey));
       dispatch(toggleModalCheckerModify(false));
       clearAllField(book, setBook, book?.quantity);
       dispatch(toggleModalChecker(false));
     } else {
-      dispatch(addBooks(book));
+      const bookToDispatchWithoutKeyError = {
+        ...book,
+        id: book.id,
+        name: book.name.value,
+        author: book.name.value,
+        gender: book.name.value,
+        img: book.name.value,
+        quantity: book.quantity,
+        disponibility: book.disponibility,
+      };
+      dispatch(addBooks(bookToDispatchWithoutKeyError));
       clearAllField(book, setBook);
       if (!toggle) {
         dispatch(toggleModalChecker(false));

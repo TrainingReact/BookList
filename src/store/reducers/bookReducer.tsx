@@ -4,8 +4,6 @@ import { addBooks } from "../../asyncCallThunkToolkit/Books/addBooks";
 import { updateBooks } from "../../asyncCallThunkToolkit/Books/updateBooks";
 import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
-import { updateQuantityValueOnBooks } from "../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
-import { updateQuantityBooks } from "../../asyncCallThunkToolkit/Books/updateQuantityBooks";
 
 export const initialState = {
   books: [],

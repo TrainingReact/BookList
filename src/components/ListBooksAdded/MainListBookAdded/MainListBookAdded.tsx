@@ -85,7 +85,9 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                   index > 0 ? "borderTopRightRadius" : "borderTopLeftRadius"
                 }
               >
-                <NameHeaderText>{val?.name?.value}</NameHeaderText>
+                <NameHeaderText>
+                  {val?.name?.value ? val?.name?.value : val.name}
+                </NameHeaderText>
               </Header>
               <WrapperItem
                 className={
@@ -102,15 +104,26 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
                       e.currentTarget.src =
                         "https://pngimg.com/uploads/book/book_PNG51090.png";
                     }}
-                    src={String(val?.img?.value)}
+                    src={String(val?.img?.value ? val?.img?.value : val.img)}
                   />
                 </ContImg>
 
-                <LabelListBookField val={val.author.value} label="author" />
+                <LabelListBookField
+                  val={val?.author?.value ? val?.author?.value : val.author}
+                  label="author"
+                />
 
-                <LabelListBookField val={val.gender.value} label="gender" />
+                <LabelListBookField
+                  val={val?.gender?.value ? val?.gender?.value : val.gender}
+                  label="gender"
+                />
 
-                <LabelListBookField val={val.quantity} label="quantity" />
+                <LabelListBookField
+                  val={
+                    val?.quantity?.value ? val?.quantity?.value : val.quantity
+                  }
+                  label="quantity"
+                />
 
                 <ContItemMapFlexIcon>
                   <CursorPointer onClick={() => handleModify(val.id)}>

@@ -69,10 +69,10 @@ const Header = () => {
                         e.currentTarget.src =
                           "https://pngimg.com/uploads/book/book_PNG51090.png";
                       }}
-                      src={String(val.img.value)}
+                      src={String(val.img)}
                     />
                   </ContainerImg>
-                  <div> {val.name.value} </div>
+                  <div> {val.name} </div>
                 </DropDownContentWrapper>
               );
             }

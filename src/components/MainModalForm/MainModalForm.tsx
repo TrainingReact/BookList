@@ -28,6 +28,8 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
     (state: any) => state.books.modalCheckerModify
   );
 
+  const store = useSelector((state: any) => state.books.books);
+
   let val = "required field";
 
   const handleAddBook = () => {
@@ -53,7 +55,7 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
     } else {
       setBook({
         ...book,
-        id: Math.random(),
+        id: !checkerModalModify ? store.length + 1 : book.id,
         [e.currentTarget.name]: {
           value: String(e.currentTarget.value),
           error: "",

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const Button = styled.button``;
+export const Button = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+`;
 
 export const WrapperShoppingCartComponent = styled.div`
   background-color: #eaeded;
@@ -26,7 +29,7 @@ export const ContainerIcon = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 100px;
+  width: 115px;
 `;
 
 export const ContainerButtonRemoveAll = styled.div`

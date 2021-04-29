@@ -1,6 +1,6 @@
 import React from "react";
 import ModalJsxTypes from "../../types/ModalJsxTypes/ModalJsxTypes";
-import { useSelector } from "react-redux";
+import { DefaultRootState, useSelector } from "react-redux";
 import Input from "../Input/Input";
 import LabelSwitch from "./LabelSwitch/LabelSwitch";
 import ButtonSubmit from "../ButtonModify/ButtonModify";
@@ -11,15 +11,20 @@ import {
   Close,
   WrapperForm,
 } from "./ModalJsxStyle";
+import { Obj } from "../MainModalForm/MainModalForm";
+import { RootState } from "../../store/store";
+import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
+import store from "../../store/store";
+
 const ModalJsx: React.FC<ModalJsxTypes> = ({
-  book,
   handleAddBook,
   handleType,
   handleClose,
   setToggle,
   toggle,
+  book,
 }) => {
-  const checkModalModify: any = useSelector(
+  const checkModalModify = useSelector(
     (state: any) => state.books.modalCheckerModify
   );
 

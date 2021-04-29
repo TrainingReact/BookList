@@ -42,35 +42,57 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
   };
 
   const handleModify = (id: number) => {
+    const bookToModify: Obj = store.find((val: Obj) => val.id === id);
+
     getKeys(book).map((key: objKeys) => {
-      let valueOfObjToModify: Obj;
-
-      store.find((val: any) =>
-        val.id === id ? (valueOfObjToModify = val[key].value) : null
-      );
-      let quantityFinded: any;
-
-      store.find((val: Obj) => {
-        return val.id === id ? (quantityFinded = val.quantity) : null;
-      });
-
       if (key !== "id" && key !== "quantity" && key !== "disponibility") {
         setBook((prevState) => ({
           ...prevState,
           [key]: {
-            value: valueOfObjToModify,
+            value: bookToModify[key],
             error: book[key].error,
           },
         }));
       } else {
         setBook((prevState) => ({
           ...prevState,
-          quantity: quantityFinded,
+          quantity: bookToModify.quantity,
         }));
       }
     });
 
-    setIdBookToModify(id && id);
+    // getKeys(book).map((key: objKeys) => {
+    //   let valueOfObjToModify: Obj;
+
+    //   console.log("book-", book);
+
+    //   store.find((val: any) =>
+    //     val.id === id ? (valueOfObjToModify = val[key].value) : null
+    //   );
+
+    //   let quantityFinded: any;
+
+    //   store.find((val: Obj) => {
+    //     return val.id === id ? (quantityFinded = val.quantity) : null;
+    //   });
+
+    //   if (key !== "id" && key !== "quantity" && key !== "disponibility") {
+    //     setBook((prevState) => ({
+    //       ...prevState,
+    //       [key]: {
+    //         value: valueOfObjToModify,
+    //         error: book[key].error,
+    //       },
+    //     }));
+    //   } else {
+    //     setBook((prevState) => ({
+    //       ...prevState,
+    //       quantity: quantityFinded,
+    //     }));
+    //   }
+    // });
+
+    setIdBookToModify(id);
     dispatch(toggleModalCheckerModify(true));
     dispatch(toggleModalChecker(true));
   };

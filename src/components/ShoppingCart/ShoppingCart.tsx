@@ -23,6 +23,7 @@ import { updateQuantityValueOnBooks } from "../../asyncCallThunkToolkit/BooksAdd
 import { Obj } from "../MainModalForm/MainModalForm";
 import { updateQuantityBooks } from "../../asyncCallThunkToolkit/Books/updateQuantityBooks";
 import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
+import { ImgMapList } from "../ListBooksAdded/MainListBookAdded/MainListBookAddedStyle";
 
 function ShoppingCart() {
   const dispatch = useDispatch();
@@ -123,6 +124,110 @@ function ShoppingCart() {
   };
 
   return (
+    <div
+      style={{
+        backgroundColor: "#EAEDED",
+        height: "100%",
+        padding: "10px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "white",
+          height: "100%",
+          padding: "20px",
+          maxWidth: "75%",
+          margin: "10px",
+        }}
+      >
+        <div>
+          <span
+            style={{
+              fontSize: "30px",
+              textTransform: "capitalize",
+              fontWeight: "bold",
+            }}
+          >
+            carrello
+          </span>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <span>prezzo</span>
+          </div>
+          <div
+            style={{
+              height: "1px",
+              backgroundColor: "gray",
+            }}
+          ></div>
+        </div>
+        {bookFromCart &&
+          bookFromCart.map((val: Obj, index: number) => {
+            return (
+              <div key={index}>
+                <div
+                  style={{
+                    padding: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <ImgMapList
+                    onError={(
+                      e: React.SyntheticEvent<HTMLImageElement, Event>
+                    ) => {
+                      e.currentTarget.src =
+                        "https://pngimg.com/uploads/book/book_PNG51090.png";
+                    }}
+                    src={String()}
+                  />
+                  <div
+                    style={{
+                      color: "green",
+                      padding: "5px",
+                      display: "flex",
+                      flexDirection: "column",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <div> {val.name} </div>
+                    <div> disponibilità immediata </div>
+                    <div> {val.gender} </div>
+                    <div> {val.author} </div>
+                    <ContainerIcon>
+                      <div onClick={() => handleAddQuantity(val)}>
+                        <AddCircleIcon />
+                      </div>
+                      <div> {val?.quantity} </div>
+                      <div
+                        onClick={() => handleDeleteItemFromShoppingCart(val)}
+                      >
+                        <RemoveCircleIcon />
+                      </div>
+                      <div
+                        style={{
+                          minWidth: "1px",
+                          backgroundColor: "gray",
+                          minHeight: "18px",
+                          marginLeft: "5px",
+                          marginRight: "5px",
+                        }}
+                      ></div>
+                      <Button onClick={() => handleDeleteBook(val)}>
+                        Remove
+                      </Button>
+                    </ContainerIcon>
+                  </div>
+                  <div>
+                    <Button onClick={handleRemoveAllBooks}>
+                      remove all books in the cart
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
     // <WrapperShoppingCartComponent>
     //   <h1>Carello</h1>
     //   <SepareteLine />
@@ -138,48 +243,48 @@ function ShoppingCart() {
     //                 e.currentTarget.src =
     //                   "https://pngimg.com/uploads/book/book_PNG51090.png";
     //               }}
-    //               src={String(book.img.value)}
+    //               src={String(book.img)}
     //             ></ImgMapList>
     //           </WrapperItem>
     //         </WrapperList>
     //       );
     //     })}
     // </WrapperShoppingCartComponent>
-    <WrapperShoppingCartComponent>
-      <ContainerTitle>
-        <h1>SHOPPING CART</h1>
-      </ContainerTitle>
-      <ContainerButtonRemoveAll>
-        <Button onClick={handleRemoveAllBooks}>
-          remove all books in the cart
-        </Button>
-      </ContainerButtonRemoveAll>
+    // <WrapperShoppingCartComponent>
+    //   <ContainerTitle>
+    //     <h1>SHOPPING CART</h1>
+    //   </ContainerTitle>
+    //   <ContainerButtonRemoveAll>
+    //     <Button onClick={handleRemoveAllBooks}>
+    //       remove all books in the cart
+    //     </Button>
+    //   </ContainerButtonRemoveAll>
 
-      {bookFromCart &&
-        bookFromCart.map((val: any, index: number) => {
-          return (
-            <ContainerItemCart key={index}>
-              <div> {val?.name?.value} </div>
+    //   {bookFromCart &&
+    //     bookFromCart.map((val: any, index: number) => {
+    //       return (
+    //         <ContainerItemCart key={index}>
+    //           <div> {val?.name?} </div>
 
-              <ContainerIcon>
-                <div onClick={() => handleAddQuantity(val)}>
-                  <AddCircleIcon />
-                </div>
-                <div> {val?.quantity} </div>
-                <div onClick={() => handleDeleteItemFromShoppingCart(val)}>
-                  <RemoveCircleIcon />
-                </div>
-              </ContainerIcon>
-              <Button onClick={() => handleDeleteBook(val)}>
-                remove from cart
-              </Button>
-            </ContainerItemCart>
-          );
-        })}
-      <WrapperPrice>
-        <h1>prezzo : </h1>
-      </WrapperPrice>
-    </WrapperShoppingCartComponent>
+    //           <ContainerIcon>
+    //             <div onClick={() => handleAddQuantity(val)}>
+    //               <AddCircleIcon />
+    //             </div>
+    //             <div> {val?.quantity} </div>
+    //             <div onClick={() => handleDeleteItemFromShoppingCart(val)}>
+    //               <RemoveCircleIcon />
+    //             </div>
+    //           </ContainerIcon>
+    //           <Button onClick={() => handleDeleteBook(val)}>
+    //             remove from cart
+    //           </Button>
+    //         </ContainerItemCart>
+    //       );
+    //     })}
+    //   <WrapperPrice>
+    //     <h1>prezzo : </h1>
+    //   </WrapperPrice>
+    // </WrapperShoppingCartComponent>
   );
 }
 
