@@ -86,7 +86,6 @@ function ShoppingCart() {
         ...val,
         quantity: val.quantity + 1,
       };
-
       dispatch(updateQuantityValueOnBooks(valAddToCartHandleQuantity));
     }
 
