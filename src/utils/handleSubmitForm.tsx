@@ -16,11 +16,9 @@ export const handleFormSubmit = (
   setBook: React.Dispatch<React.SetStateAction<Obj>>,
   dispatch: Dispatch<any>,
   checkerModalModify: any,
-  idBookToModify: number,
   toggle: Boolean
 ) => {
   setError(book, setBook, val);
-
   //this function return array of boolean to check if all field are fill
   const allFill = getKeys(book).every((key) => {
     if (key === "id" || key === "quantity" || key === "disponibility") {

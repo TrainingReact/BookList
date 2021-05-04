@@ -4,7 +4,6 @@ const findFunction = (book: any, id: number) => {
   const bookFinded = book.find((val: Obj) => {
     return val.id === id;
   });
-
   return bookFinded;
 };
 

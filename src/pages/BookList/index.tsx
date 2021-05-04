@@ -12,8 +12,6 @@ import {
 import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
 
 const Index = () => {
-  const [idBookToModify, setIdBookToModify] = useState<number>(0);
-
   const dispatch = useDispatch();
 
   const [book, setBook] = useState<Obj>({
@@ -40,17 +38,8 @@ const Index = () => {
 
   return (
     <div>
-      <AddBookButton
-        idBookToModify={idBookToModify}
-        handleClose={handleClose}
-        book={book}
-        setBook={setBook}
-      />
-      <ListBooksAdded
-        book={book}
-        setBook={setBook}
-        setIdBookToModify={setIdBookToModify}
-      />
+      <AddBookButton handleClose={handleClose} book={book} setBook={setBook} />
+      <ListBooksAdded book={book} setBook={setBook} />
     </div>
   );
 };

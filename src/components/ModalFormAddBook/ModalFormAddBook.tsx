@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const ModalFormAddBook: React.FC<ModalProps> = ({
   handleClose,
   book,
-  idBookToModify,
   setBook,
 }) => {
   const checkerModal = useSelector((state: any) => state.books.modalChecker);
@@ -18,7 +17,6 @@ const ModalFormAddBook: React.FC<ModalProps> = ({
             <MainModalForm
               setBook={setBook}
               book={book}
-              idBookToModify={idBookToModify}
               handleClose={handleClose}
             />
           </ModalContent>

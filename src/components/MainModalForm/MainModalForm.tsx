@@ -18,7 +18,6 @@ export interface Obj {
 const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
   handleClose,
   book,
-  idBookToModify,
   setBook,
 }) => {
   const [toggle, setToggle] = useState<Boolean>(false);
@@ -32,22 +31,17 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
 
   let val = "required field";
 
+  //this function start at onClick event on submit button
   const handleAddBook = () => {
-    handleFormSubmit(
-      book,
-      val,
-      setBook,
-      dispatch,
-      checkerModalModify,
-      idBookToModify,
-      toggle
-    );
+    handleFormSubmit(book, val, setBook, dispatch, checkerModalModify, toggle);
   };
 
+  //this function start at onKeyUp in modal input
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.name === "quantity") {
       setBook({
         ...book,
+        id: checkerModalModify ? book.id : store.length + 1,
         [e.currentTarget.name]:
           +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
         disponibility: +e.currentTarget.value < 1 ? 1 : +e.currentTarget.value,
@@ -55,7 +49,7 @@ const MainModalForm: React.FC<MainModalFormPropsTypes> = ({
     } else {
       setBook({
         ...book,
-        id: !checkerModalModify ? store.length + 1 : book.id,
+        id: checkerModalModify ? book.id : store.length + 1,
         [e.currentTarget.name]: {
           value: String(e.currentTarget.value),
           error: "",

@@ -5,6 +5,7 @@ import { Obj } from "../../components/MainModalForm/MainModalForm";
 export const updateQuantityBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
   "books/updateBooks",
   async (book: Obj) => {
+    console.log("book inside axios call->", book);
     return axios
       .patch(`http://localhost:4000/books/${book?.id}`, {
         quantity: book.quantity,

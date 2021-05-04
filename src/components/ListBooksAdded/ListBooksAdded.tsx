@@ -15,11 +15,7 @@ import { Obj } from "../MainModalForm/MainModalForm";
 import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
 import findFunction from "../../utils/findFunction";
 
-const ListBooksAdded: React.FC<ListBookAddedType> = ({
-  setIdBookToModify,
-  book,
-  setBook,
-}) => {
+const ListBooksAdded: React.FC<ListBookAddedType> = ({ book, setBook }) => {
   const store = useSelector((state: any) => state.books.books);
 
   const storeFromCart = useSelector(
@@ -43,7 +39,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
   const handleModify = (id: number) => {
     const bookToModify: Obj = findFunction(store, id);
 
-    getKeys(book).map((key: objKeys) => {
+    getKeys(book).forEach((key: objKeys) => {
       if (key !== "id" && key !== "quantity" && key !== "disponibility") {
         setBook((prevState) => ({
           ...prevState,
@@ -55,12 +51,12 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
       } else {
         setBook((prevState) => ({
           ...prevState,
+          id: bookToModify.id,
           quantity: bookToModify.quantity,
         }));
       }
     });
 
-    setIdBookToModify(id);
     dispatch(toggleModalCheckerModify(true));
     dispatch(toggleModalChecker(true));
   };
