@@ -77,7 +77,6 @@ function ShoppingCart() {
   };
 
   // this func find the book with same id of the book u want to add quantity
-  // create a new objecet spredding the
 
   const handleAddQuantity = (val: Obj) => {
     const findBook: Obj = findFunction(books, val.id);

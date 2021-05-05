@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 import { Obj } from "../../components/MainModalForm/MainModalForm";
 
@@ -10,7 +10,7 @@ export const updateQuantityBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
       .patch(`http://localhost:4000/books/${book?.id}`, {
         quantity: book.quantity,
       })
-      .then((re: any) => {
+      .then((re: AxiosResponse) => {
         return re.data;
       });
   }

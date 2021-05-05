@@ -1,11 +1,13 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
 
-export const deleteBooks: AsyncThunk<any, any, {}> = createAsyncThunk(
+export const deleteBooks = createAsyncThunk(
   "books/deleteBooks",
-  async (id: any) => {
-    return axios.delete(`http://localhost:4000/books/${id}`).then((re: any) => {
-      return id;
-    });
+  async (id: number) => {
+    return axios
+      .delete(`http://localhost:4000/books/${id}`)
+      .then((re: AxiosResponse) => {
+        return id;
+      });
   }
 );
