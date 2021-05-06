@@ -9,6 +9,8 @@ import { Obj } from "../MainModalForm/MainModalForm";
 import { updateQuantityBooks } from "../../asyncCallThunkToolkit/Books/updateQuantityBooks";
 import { getBooks } from "../../asyncCallThunkToolkit/Books/getBooks";
 import ShoppingCartJsx from "../ShoppingCartJsx/ShoppingCartJsx";
+import findFunction from "../../utils/findFunction";
+import SpreadToDispatch from "../../utils/spreadToDispatch";
 
 function ShoppingCart() {
   const dispatch = useDispatch();
@@ -28,31 +30,32 @@ function ShoppingCart() {
 
   const handleDeleteItemFromShoppingCart = (val: Obj) => {
     if (val.quantity > 1) {
-      const valRemoveToCartHandleQuantity = {
-        ...val,
-        quantity: val.quantity - 1,
-      };
+      const valRemoveToCartHandleQuantity = SpreadToDispatch(
+        val,
+        "quantity",
+        val.quantity - 1
+      );
 
-      const findBook: Obj = books.find((bookFromStore: Obj) => {
-        return bookFromStore.id === val.id;
-      });
+      const findBook = findFunction(books, val.id);
 
-      const bookWithQuantityAdded: Obj = {
-        ...findBook,
-        quantity: findBook.quantity + 1,
-      };
+      const bookWithQuantityAdded = SpreadToDispatch(
+        findBook,
+        "quantity",
+        findBook.quantity + 1
+      );
 
       dispatch(updateQuantityBooks(bookWithQuantityAdded));
 
       dispatch(updateQuantityValueOnBooks(valRemoveToCartHandleQuantity));
     } else {
-      const findBook: Obj = books.find((bookFromStore: Obj) => {
-        return bookFromStore.id === val.id;
-      });
-      const bookWithQuantityAdded: Obj = {
-        ...findBook,
-        quantity: findBook.quantity + 1,
-      };
+      const findBook = findFunction(books, val.id);
+
+      const bookWithQuantityAdded = SpreadToDispatch(
+        findBook,
+        "quantity",
+        findBook.quantity + 1
+      );
+
       dispatch(updateQuantityBooks(bookWithQuantityAdded));
       dispatch(deleteBooksToCart(val.id));
       if (bookFromCart.length === 1) hisotry.push("/");
@@ -60,14 +63,13 @@ function ShoppingCart() {
   };
 
   const handleDeleteBook = (bookClicked: Obj) => {
-    const findBook: Obj = books.find((book: Obj) => {
-      return book.id === bookClicked.id;
-    });
+    const findBook = findFunction(books, bookClicked.id);
 
-    const updateQuantity: Obj = {
-      ...findBook,
-      quantity: findBook.quantity + bookClicked.quantity,
-    };
+    const updateQuantity = SpreadToDispatch(
+      findBook,
+      "quantity",
+      findBook.quantity + bookClicked.quantity
+    );
 
     dispatch(updateQuantityBooks(updateQuantity));
     dispatch(deleteBooksToCart(bookClicked.id));
@@ -75,26 +77,27 @@ function ShoppingCart() {
   };
 
   // this func find the book with same id of the book u want to add quantity
-  // create a new objecet spredding the
+
   const handleAddQuantity = (val: Obj) => {
-    const findBook: Obj = books.find((bookFromStore: Obj) => {
-      return bookFromStore.id === val.id;
-    });
+    const findBook: Obj = findFunction(books, val.id);
 
     if (val.quantity < findBook.disponibility) {
-      const valAddToCartHandleQuantity = {
-        ...val,
-        quantity: val.quantity + 1,
-      };
+      const valAddToCartHandleQuantity = SpreadToDispatch(
+        val,
+        "quantity",
+        val.quantity + 1
+      );
 
       dispatch(updateQuantityValueOnBooks(valAddToCartHandleQuantity));
     }
 
     if (findBook.quantity > 0) {
-      const bookWithQuantity: Obj = {
-        ...findBook,
-        quantity: findBook.quantity - 1,
-      };
+      const bookWithQuantity = SpreadToDispatch(
+        findBook,
+        "quantity",
+        findBook.quantity - 1
+      );
+
       dispatch(updateQuantityBooks(bookWithQuantity));
     }
   };
@@ -104,7 +107,6 @@ function ShoppingCart() {
       dispatch(updateQuantityBooks(element));
       dispatch(deleteBooksToCart(element.id));
     });
-
     hisotry.push("/");
   };
 

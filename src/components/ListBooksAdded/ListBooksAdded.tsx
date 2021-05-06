@@ -13,12 +13,9 @@ import MainListBookAdded from "./MainListBookAdded/MainListBookAdded";
 import { deleteBooks } from "../../asyncCallThunkToolkit/Books/deleteBooks";
 import { Obj } from "../MainModalForm/MainModalForm";
 import { deleteBooksToCart } from "../../asyncCallThunkToolkit/BooksAdded/deleteBooksToCart";
+import findFunction from "../../utils/findFunction";
 
-const ListBooksAdded: React.FC<ListBookAddedType> = ({
-  setIdBookToModify,
-  book,
-  setBook,
-}) => {
+const ListBooksAdded: React.FC<ListBookAddedType> = ({ book, setBook }) => {
   const store = useSelector((state: any) => state.books.books);
 
   const storeFromCart = useSelector(
@@ -32,9 +29,7 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
   const handleDelete = (id: number) => {
     dispatch(deleteBooks(id));
 
-    const check = storeFromCart.find((val: any) => {
-      return val.id === id;
-    });
+    const check = findFunction(storeFromCart, id);
 
     if (check) dispatch(deleteBooksToCart(id));
 
@@ -42,9 +37,9 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
   };
 
   const handleModify = (id: number) => {
-    const bookToModify: Obj = store.find((val: Obj) => val.id === id);
+    const bookToModify: Obj = findFunction(store, id);
 
-    getKeys(book).map((key: objKeys) => {
+    getKeys(book).forEach((key: objKeys) => {
       if (key !== "id" && key !== "quantity" && key !== "disponibility") {
         setBook((prevState) => ({
           ...prevState,
@@ -56,43 +51,12 @@ const ListBooksAdded: React.FC<ListBookAddedType> = ({
       } else {
         setBook((prevState) => ({
           ...prevState,
+          id: bookToModify.id,
           quantity: bookToModify.quantity,
         }));
       }
     });
 
-    // getKeys(book).map((key: objKeys) => {
-    //   let valueOfObjToModify: Obj;
-
-    //   console.log("book-", book);
-
-    //   store.find((val: any) =>
-    //     val.id === id ? (valueOfObjToModify = val[key].value) : null
-    //   );
-
-    //   let quantityFinded: any;
-
-    //   store.find((val: Obj) => {
-    //     return val.id === id ? (quantityFinded = val.quantity) : null;
-    //   });
-
-    //   if (key !== "id" && key !== "quantity" && key !== "disponibility") {
-    //     setBook((prevState) => ({
-    //       ...prevState,
-    //       [key]: {
-    //         value: valueOfObjToModify,
-    //         error: book[key].error,
-    //       },
-    //     }));
-    //   } else {
-    //     setBook((prevState) => ({
-    //       ...prevState,
-    //       quantity: quantityFinded,
-    //     }));
-    //   }
-    // });
-
-    setIdBookToModify(id);
     dispatch(toggleModalCheckerModify(true));
     dispatch(toggleModalChecker(true));
   };

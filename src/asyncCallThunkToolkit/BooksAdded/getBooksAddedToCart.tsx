@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getBooksAddedToCart = createAsyncThunk(
@@ -6,7 +6,7 @@ export const getBooksAddedToCart = createAsyncThunk(
   async () => {
     return axios
       .get("http://localhost:4000/booksAddedToCart")
-      .then((res: any) => {
+      .then((res: AxiosResponse) => {
         return res.data;
       });
   }

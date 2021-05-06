@@ -11,10 +11,6 @@ import {
   Close,
   WrapperForm,
 } from "./ModalJsxStyle";
-import { Obj } from "../MainModalForm/MainModalForm";
-import { RootState } from "../../store/store";
-import { BookState } from "../../types/BookStoreTypes/BookStoreTypes";
-import store from "../../store/store";
 
 const ModalJsx: React.FC<ModalJsxTypes> = ({
   handleAddBook,

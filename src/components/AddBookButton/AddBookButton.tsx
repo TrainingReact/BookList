@@ -11,7 +11,6 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
   handleClose,
   book,
   setBook,
-  idBookToModify,
 }) => {
   const store = useSelector((state: any) => state.books.books);
 
@@ -36,7 +35,6 @@ const AddBookButton: React.FC<AddBookButtonTypes> = ({
       <ModalFormAddBook
         setBook={setBook}
         book={book}
-        idBookToModify={idBookToModify}
         handleClose={handleClose}
       />
     </Wrapper>

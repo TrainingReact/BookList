@@ -21,6 +21,8 @@ import { addBooksToCart } from "../../../asyncCallThunkToolkit/BooksAdded/addBoo
 import { updateQuantityValueOnBooks } from "../../../asyncCallThunkToolkit/BooksAdded/updateQuantityValueOnBooks";
 import { Obj } from "../../MainModalForm/MainModalForm";
 import { updateQuantityBooks } from "../../../asyncCallThunkToolkit/Books/updateQuantityBooks";
+import findFunction from "../../../utils/findFunction";
+import spreadToDispatch from "../../../utils/spreadToDispatch";
 
 const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   lastItem,
@@ -36,34 +38,33 @@ const MainListBookAdded: React.FC<MainListBookAddedTypes> = ({
   const dispatch = useDispatch();
 
   const handleAddBookToCart = (id: number) => {
-    let bookToAddOnTheCart: Obj;
+    let bookToAddOnTheCart: Obj = findFunction(booksFromStore, id);
 
-    bookToAddOnTheCart = booksFromStore.find((val: any) => {
-      return val.id === id;
-    });
-
-    const result = booksAdded.find((val: any) => {
-      return val.id === id;
-    });
+    const result: Obj = findFunction(booksAdded, id);
 
     if (result === undefined) {
-      const newOne = { ...bookToAddOnTheCart, quantity: 1 };
+      const newOne = spreadToDispatch(bookToAddOnTheCart, "quantity", 1);
 
-      const newUpdateQuantityBeforeFirstBook = {
-        ...bookToAddOnTheCart,
-        quantity: bookToAddOnTheCart.quantity - 1,
-      };
+      const newUpdateQuantityBeforeFirstBook = spreadToDispatch(
+        bookToAddOnTheCart,
+        "quantity",
+        bookToAddOnTheCart.quantity - 1
+      );
 
       dispatch(updateQuantityBooks(newUpdateQuantityBeforeFirstBook));
-
       dispatch(addBooksToCart(newOne));
     } else {
-      const boostQuantity = { ...result, quantity: result.quantity + 1 };
+      const boostQuantity = spreadToDispatch(
+        result,
+        "quantity",
+        result.quantity + 1
+      );
 
-      const newUpdateQuantity = {
-        ...bookToAddOnTheCart,
-        quantity: bookToAddOnTheCart.quantity - 1,
-      };
+      const newUpdateQuantity = spreadToDispatch(
+        bookToAddOnTheCart,
+        "quantity",
+        bookToAddOnTheCart.quantity - 1
+      );
 
       if (newUpdateQuantity.quantity > -1)
         dispatch(updateQuantityValueOnBooks(boostQuantity));
